@@ -27,9 +27,14 @@ namespace WeatherAlertBot.Controllers
         {
             Console.WriteLine(update.Message.Text);
             var userSettings = new UserSettings { Location = "Kyiv" };
-            string weatherData = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
+            var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
-            await bot.SendTextMessageAsync(update.Message.Chat.Id, weatherData);
+            string message = $"Time: {weatherResult.Time}\n" +
+                             $"Temperature: {weatherResult.Temperature}°C\n" +
+                             $"Rain(mm): {weatherResult.Rain}\n" +
+                             $"Wind speed(km/h): {weatherResult.WindSpeed}\n";
+
+            await bot.SendTextMessageAsync(update.Message.Chat.Id, message);
         }
 
         [HttpGet]

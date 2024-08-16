@@ -36,16 +36,26 @@ namespace WeatherAlertBot.Services
                 return geocodingResult;
             }
         }
-        public async Task<string> GetWeatherDataStringResponse(UserSettings settings, string geocodingApiKey)
+        public async Task<WeatherResult> GetWeatherDataStringResponse(UserSettings settings, string geocodingApiKey)
         {
+            var weatherResult = new WeatherResult();
+
             using (HttpClient client = new HttpClient())
             {
                 string url = UpdatedAPILink(settings, geocodingApiKey);
                 HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
 
-                string responseData = await response.Content.ReadAsStringAsync();
-                return responseData;
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<WeatherResult>(responseData);
+
+                    if (result != null)
+                    {
+                        weatherResult = result;
+                    }
+                }
+                return weatherResult;
             }
         }
     }
