@@ -1,9 +1,10 @@
 ﻿using GoogleMaps.LocationServices;
 using Newtonsoft.Json;
+using WeatherAlertBot.Models;
 
-namespace WeatherAlertBot.Models
+namespace WeatherAlertBot.Services
 {
-    public class APILink
+    public class WeatherService
     {
         public string UpdatedAPILink(UserSettings settings, string geocodingApiKey)
         {
@@ -21,12 +22,12 @@ namespace WeatherAlertBot.Models
                 string url = $"https://geocode.maps.co/search?q={address}&api_key={geocodingApiKey}";
                 HttpResponseMessage response = await client.GetAsync(url);
 
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
                     var results = JsonConvert.DeserializeObject<List<GeocodingResult>>(responseData);
 
-                    if(results != null)
+                    if (results != null)
                     {
                         var firstResult = results.FirstOrDefault();
                         geocodingResult = firstResult;
