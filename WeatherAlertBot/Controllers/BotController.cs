@@ -10,17 +10,23 @@ namespace WeatherAlertBot.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        public TelegramBotClient _bot { get; set; }
+        public TelegramBotClient bot { get; set; }
+        public APILink apiLink { get; set; }
         public BotController(IConfiguration configuration)
         {
             string botToken = configuration["botToken"];
-            _bot = Bot.GetTelegramBot(botToken); 
+            bot = Bot.GetTelegramBot(botToken);
+            apiLink = new APILink();
         }
 
         [HttpPost]
-        public void Post(Update update)
+        public async void Post(Update update)
         {
             Console.WriteLine(update.Message.Text);
+            var userSettings = new UserSettings { Location = "Kyiv" };
+            string weatherData = await apiLink.GetWeatherDataStringResponse(userSettings);
+
+            await bot.SendTextMessageAsync(update.Message.Chat.Id, weatherData);
         }
 
         [HttpGet]

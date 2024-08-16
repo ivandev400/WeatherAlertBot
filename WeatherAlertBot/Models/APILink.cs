@@ -9,6 +9,7 @@ namespace WeatherAlertBot.Models
 
         public string UpdatedAPILink(UserSettings settings)
         {
+            LocationConvertor(settings);
             string link = $"https://api.open-meteo.com/v1/forecast?latitude={Latitude}&longitude={Longitude}&current=temperature_2m,rain,wind_speed_10m&forecast_days=1";
             return link;
         }
