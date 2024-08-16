@@ -22,5 +22,17 @@ namespace WeatherAlertBot.Models
             Latitude = point.Latitude;
             Longitude = point.Longitude;
         }
+        public async Task<string> GetWeatherDataStringResponse(UserSettings settings)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string url = UpdatedAPILink(settings);
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string responseData = await response.Content.ReadAsStringAsync();
+                return responseData;
+            }
+        }
     }
 }
