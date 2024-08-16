@@ -7,6 +7,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 var app = builder.Build();
