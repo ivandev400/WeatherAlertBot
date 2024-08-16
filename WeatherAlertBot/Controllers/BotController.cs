@@ -12,9 +12,11 @@ namespace WeatherAlertBot.Controllers
     {
         public TelegramBotClient bot { get; set; }
         public APILink apiLink { get; set; }
+        public string geocodingApiKey { get; set; }
         public BotController(IConfiguration configuration)
         {
             string botToken = configuration["botToken"];
+            geocodingApiKey = configuration["GeocodingApiKey"];
             bot = Bot.GetTelegramBot(botToken);
             apiLink = new APILink();
         }
@@ -24,7 +26,7 @@ namespace WeatherAlertBot.Controllers
         {
             Console.WriteLine(update.Message.Text);
             var userSettings = new UserSettings { Location = "Kyiv" };
-            string weatherData = await apiLink.GetWeatherDataStringResponse(userSettings);
+            string weatherData = await apiLink.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
             await bot.SendTextMessageAsync(update.Message.Chat.Id, weatherData);
         }
