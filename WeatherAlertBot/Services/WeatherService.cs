@@ -48,11 +48,11 @@ namespace WeatherAlertBot.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<WeatherResult>(responseData);
+                    var currentWeather = JsonConvert.DeserializeObject<CurrentWeather>(responseData);
 
-                    if (result != null)
+                    if (currentWeather != null)
                     {
-                        weatherResult = result;
+                        weatherResult = currentWeather.Current;
                     }
                 }
                 return weatherResult;
