@@ -29,7 +29,7 @@ namespace WeatherAlertBot.Controllers
             var userSettings = new UserSettings { Location = "Kyiv" };
             var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
-            string message = $"Time: {weatherResult.Time}\n" +
+            string message = $"Time: {weatherResult.Time.ToString("HH:mm")}\n" +
                              $"Temperature: {weatherResult.Temperature}°C\n" +
                              $"Rain(mm): {weatherResult.Rain}\n" +
                              $"Wind speed(km/h): {weatherResult.WindSpeed}\n";
