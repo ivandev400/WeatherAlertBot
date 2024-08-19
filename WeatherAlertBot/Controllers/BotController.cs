@@ -16,9 +16,8 @@ namespace WeatherAlertBot.Controllers
         public string geocodingApiKey { get; set; }
         public BotController(IConfiguration configuration)
         {
-            string botToken = configuration["botToken"];
             geocodingApiKey = configuration["GeocodingApiKey"];
-            bot = Bot.GetTelegramBot(botToken);
+            bot = Bot.GetTelegramBot();
             weatherService = new WeatherService();
         }
 

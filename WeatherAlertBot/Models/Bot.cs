@@ -1,19 +1,25 @@
-﻿using Telegram.Bot;
+﻿using System.Runtime.CompilerServices;
+using Telegram.Bot;
 
 namespace WeatherAlertBot.Models
 {
     public class Bot
     {
-        public static TelegramBotClient client { get; private set; }
-        
-        public static TelegramBotClient GetTelegramBot(string botToken)
+        public static TelegramBotClient Client { get; private set; }
+        private static string BotToken { get; set; }
+
+        private IConfiguration Configuration;
+
+        private Bot() => BotToken = Configuration["BotToken"];
+
+        public static TelegramBotClient GetTelegramBot()
         {
-            if(client != null)
+            if (Client != null)
             {
-                return client;
+                return Client;
             }
-            client = new TelegramBotClient(botToken);
-            return client;
+            Client = new TelegramBotClient(BotToken);
+            return Client;
         }
     }
 }
