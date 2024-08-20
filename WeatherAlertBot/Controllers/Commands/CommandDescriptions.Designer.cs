@@ -61,9 +61,9 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is Weather Alert Bot(or storm watch).This Bot was created to help you to know weather at time. Here you can use different commands: /Start - launch the bot,   /CurrentWeather - immidiately send you message with weather info in location that you have set using command /Settings (default location is Kyiv).
+        ///   Looks up a localized string similar to This is Weather Alert Bot(or storm watch).This Bot was created to help you to know weather at time. Here you can use different commands: /start - launch the bot,   /currentweather - immidiately send you message with weather info in location that you have set using command /settings (default location is Kyiv).
         ///
-        ///Это Weather Alert Bot (или штормовой дозор). Этот бот был создан, чтобы помочь вам узнать погоду в данный момент. Здесь вы можете использовать различные команды: /Start - запустить бота, /CurrentWea [rest of string was truncated]&quot;;.
+        ///Это Weather Alert Bot (или штормовой дозор). Этот бот был создан, чтобы помочь вам узнать погоду в данный момент. Здесь вы можете использовать различные команды: /start - запустить бота, /currentwea [rest of string was truncated]&quot;;.
         /// </summary>
         public static string StartCommandDescription {
             get {

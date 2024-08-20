@@ -8,9 +8,10 @@ namespace WeatherAlertBot.Models
         public static TelegramBotClient Client { get; private set; }
         private static string BotToken { get; set; }
 
-        private IConfiguration Configuration;
-
-        private Bot() => BotToken = Configuration["BotToken"];
+        public Bot(IConfiguration configuration)
+        {
+            BotToken = configuration["BotToken"];
+        }
 
         public static TelegramBotClient GetTelegramBot()
         {
