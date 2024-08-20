@@ -7,10 +7,16 @@ namespace WeatherAlertBot.Models
     {
         public static TelegramBotClient Client { get; private set; }
         private static string BotToken { get; set; }
+        public static string GeocodingApiKey { get; set; }
 
-        public Bot(IConfiguration configuration)
+        static Bot()
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             BotToken = configuration["BotToken"];
+            GeocodingApiKey = configuration["GeocodingApiKey"];
         }
 
         public static TelegramBotClient GetTelegramBot()
