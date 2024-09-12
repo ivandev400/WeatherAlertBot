@@ -4,12 +4,12 @@ using WeatherAlertBot.Db;
 
 namespace WeatherAlertBot.Services
 {
-    public class IfUserExists
+    public class IfUserExistsService
     {
         private readonly UserContext _userContext;
-        private Logger<IfUserExists> _logger;
+        private Logger<IfUserExistsService> _logger;
 
-        public bool UserExistsAsync(Update update)
+        public bool UserExists(Update update)
         {
             try
             {
