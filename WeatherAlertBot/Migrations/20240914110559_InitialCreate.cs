@@ -1,13 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace WeatherAlertBot.Migrations
 {
     /// <inheritdoc />
-    public partial class UserContextMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +16,7 @@ namespace WeatherAlertBot.Migrations
                 columns: table => new
                 {
                     ChatId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -29,9 +28,9 @@ namespace WeatherAlertBot.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<long>(type: "bigint", nullable: false),
-                    Location = table.Column<string>(type: "text", nullable: false),
-                    UpdateInterval = table.Column<string>(type: "text", nullable: false),
-                    MorningTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false)
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdateInterval = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MorningTime = table.Column<TimeOnly>(type: "time", nullable: false)
                 },
                 constraints: table =>
                 {
