@@ -13,7 +13,8 @@ namespace WeatherAlertBot.Controllers.Commands
             commands = new List<ICommand>
             {
                 new StartCommand(),
-                new CurrentWeatherCommand()
+                new CurrentWeatherCommand(),
+                new SettingsCommand()
             };
         }
         public async Task GetUpdate(Update update)
