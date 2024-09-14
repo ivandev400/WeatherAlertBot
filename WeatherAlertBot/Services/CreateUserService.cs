@@ -11,12 +11,12 @@ namespace WeatherAlertBot.Services
         private Logger<IfUserExistsService> _logger;
         private IfUserExistsService _userExistsService;
 
-        public bool CreateUser(Update update)
+        public void CreateUser(Update update)
         {
-            if (_userExistsService.UserExistsByUpdate(update))
+            if (_userExistsService.UserExists(update))
             {
                 _logger.LogWarning("The user already exists");
-                return false;
+                return;
             }
             if(update.Message != null)
             {
@@ -29,7 +29,6 @@ namespace WeatherAlertBot.Services
                 _userContext.Users.Add(newUser);
                 _userContext.SaveChanges();
             }
-            return true;
         }
     }
 }

@@ -15,8 +15,6 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             long chatId = update.Message.Chat.Id;
             await Client.SendTextMessageAsync(chatId, CommandDescription);
-
-
         }
     }
 }
