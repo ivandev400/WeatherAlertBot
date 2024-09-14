@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Converters;
 using WeatherAlertBot.Db;
 
@@ -17,7 +16,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnCh
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddDbContext<UserContext>(options =>
-       options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
+       options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
 var app = builder.Build();
 
