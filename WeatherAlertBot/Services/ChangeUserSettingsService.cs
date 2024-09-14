@@ -1,6 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Db;
+using WeatherAlertBot.Services;
 
 namespace WeatherAlertBot.Services
 {

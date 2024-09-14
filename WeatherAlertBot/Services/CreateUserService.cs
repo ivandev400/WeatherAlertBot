@@ -13,7 +13,7 @@ namespace WeatherAlertBot.Services
 
         public void CreateUser(Update update)
         {
-            if (_userExistsService.UserExists(update))
+            if (_userExistsService.UserExistsByUpdate(update))
             {
                 _logger.LogWarning("The user already exists");
                 return;
