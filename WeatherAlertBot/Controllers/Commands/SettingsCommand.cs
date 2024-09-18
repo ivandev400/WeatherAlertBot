@@ -12,19 +12,14 @@ namespace WeatherAlertBot.Controllers.Commands
 		public string CommandName => "/settings";
 		public string CommandDescription => null;
 
-		private ReturnSettingsService _settingsService;
-		public SettingsCommand(ReturnSettingsService returnSettingsService)
-		{
-			_settingsService = returnSettingsService;
-		}
+		public ReturnSettingsService SettingsService { get; set; }
 
 		public async Task Execute(Update update)
 		{
 			long chatId = update.Message.Chat.Id;
+            var result = SettingsService.ReturnSettings(update);
 
-			var result = _settingsService.ReturnSettings(update);
-
-			await Client.SendMessageAsync(chatId, result);
+			await Client.SendTextMessageAsync(chatId, result);
 		}
 	}
 }

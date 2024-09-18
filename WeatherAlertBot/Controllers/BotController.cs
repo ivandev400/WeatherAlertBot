@@ -12,7 +12,6 @@ namespace WeatherAlertBot.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private TelegramBotClient bot => Bot.GetTelegramBot();
         private UpdateDistributor<CommandExecutor> updateDistributor = new UpdateDistributor<CommandExecutor>();
 
         [HttpPost]

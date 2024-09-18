@@ -5,12 +5,17 @@ namespace WeatherAlertBot.Controllers.Commands
 {
     public class CommandExecutor : ITelegramUpdateListener
     {
-        private readonly IEnumerable<ICommand> _commands;
+        private readonly List<ICommand> commands;
         private IListener? listener = null;
 
-        public CommandExecutor(IEnumerable<ICommand> commands)
+        public CommandExecutor()
         {
-            _commands = commands;
+            commands = new List<ICommand>
+            {
+                new StartCommand(),
+                new CurrentWeatherCommand(),
+                new SettingsCommand()
+            };
         }
         public async Task GetUpdate(Update update)
         {
@@ -27,9 +32,9 @@ namespace WeatherAlertBot.Controllers.Commands
         private async Task ExecuteCommand(Update update)
         {
             Message message = update.Message;
-            foreach (var command in _commands)
+            foreach (var command in commands)
             {
-                if (command.CommandName == message.Text)
+                if (command.CommandName == message?.Text)
                 {
                     await command.Execute(update);
                 }
