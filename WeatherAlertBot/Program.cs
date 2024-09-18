@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Converters;
+using WeatherAlertBot.Controllers.Commands;
 using WeatherAlertBot.Db;
+using WeatherAlertBot.Services;
+using WeatherAlertBot.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+builder.Services.AddScoped<ICommand, StartCommand>();
+builder.Services.AddScoped<ICommand, CurrentWeatherCommand>();
+builder.Services.AddScoped<ICommand, SettingsCommand>();
+
+builder.Services.AddScoped<ReturnSettingsService>();
+builder.Services.AddScoped<CommandExecutor>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
