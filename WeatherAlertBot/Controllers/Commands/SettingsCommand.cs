@@ -24,7 +24,7 @@ namespace WeatherAlertBot.Controllers.Commands
 
 			var result = _settingsService.ReturnSettings(update);
 
-			await Client.SendTextMessageAsync(chatId, result);
+			await Client.SendMessageAsync(chatId, result);
 		}
 	}
 }
