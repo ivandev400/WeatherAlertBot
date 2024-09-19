@@ -7,7 +7,7 @@ namespace WeatherAlertBot.Factories
 {
     public class CommandFactory
     {
-        public T CreateFactory<T> (IServiceProvider serviceProvider) where T : ICommand
+        public static T CreateCommand<T> (IServiceProvider serviceProvider) where T : ICommand
         {
             var command = ActivatorUtilities.CreateInstance<T>(serviceProvider);
 

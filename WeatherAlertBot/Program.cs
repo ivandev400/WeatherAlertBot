@@ -3,6 +3,7 @@ using WeatherAlertBot.Controllers.Commands;
 using WeatherAlertBot.Db;
 using WeatherAlertBot.Services;
 using WeatherAlertBot.Interfaces;
+using WeatherAlertBot.Factories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,12 @@ builder.Services.AddScoped<IfUserExistsService>();
 builder.Services.AddScoped<ReturnSettingsService>();
 builder.Services.AddScoped<CreateUserService>();
 builder.Services.AddScoped<ChangeUserSettingsService>();
+
+builder.Services.AddScoped<SettingsCommand>(serviceProvider =>
+    CommandFactory.CreateCommand<SettingsCommand>(serviceProvider));
+
+builder.Services.AddScoped<StartCommand>(serviceProvider =>
+    CommandFactory.CreateCommand<StartCommand>(serviceProvider));
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
