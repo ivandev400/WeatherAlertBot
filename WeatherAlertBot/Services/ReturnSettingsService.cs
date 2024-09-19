@@ -14,6 +14,13 @@ namespace WeatherAlertBot.Services
         private Logger<IfUserExistsService> _logger;
         private IfUserExistsService _userExistsService;
 
+        public ReturnSettingsService(UserContext userContext, Logger<IfUserExistsService> logger, IfUserExistsService userExistsService)
+        {
+            _userContext = userContext;
+            _logger = logger;
+            _userExistsService = userExistsService;
+        }
+
         public string ReturnSettings(Update update)
         {
             if (_userExistsService.UserExistsByUpdate(update))
@@ -27,8 +34,11 @@ namespace WeatherAlertBot.Services
                     $"Update interval: {user.UserSettings.UpdateInterval} \n" +
                     $"Morning time: {user.UserSettings.MorningTime}";
                 return result;
+            }else
+            {
+                return "can't return settings";
             }
-            return "can't return settings";
+            
         }
     }
 }

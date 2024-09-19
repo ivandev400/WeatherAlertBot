@@ -9,6 +9,12 @@ namespace WeatherAlertBot.Services
         private readonly UserContext _userContext;
         private Logger<IfUserExistsService> _logger;
 
+        public IfUserExistsService(UserContext userContext, Logger<IfUserExistsService> logger)
+        {
+            _userContext = userContext;
+            _logger = logger;
+        }
+
         public bool UserExistsByUpdate(Update update)
         {
             try

@@ -9,6 +9,12 @@ namespace WeatherAlertBot.Services
     {
         private Logger<IfUserExistsService> _logger;
         private IfUserExistsService _ifUserExistsService;
+        
+        public ChangeUserSettingsService(Logger<IfUserExistsService> logger, IfUserExistsService ifUserExistsService)
+        {
+            _logger = logger;
+            _ifUserExistsService = ifUserExistsService;
+        }
 
         public void ChangeUserSettingsLocation(Models.User user, string location)
         {
