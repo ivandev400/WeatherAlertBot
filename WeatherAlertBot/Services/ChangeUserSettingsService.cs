@@ -1,20 +1,26 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Db;
+using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Services;
 
 namespace WeatherAlertBot.Services
 {
-    public class ChangeUserSettingsService
+    public class ChangeUserSettingsService : IChangeUserSettingsService
     {
         private Logger<UserExistsService> _logger;
-        private UserExistsService _ifUserExistsService = new UserExistsService();
+        private IUserExistsService _userExistsService;
+
+        public ChangeUserSettingsService(IUserExistsService userExistsService)
+        {
+            _userExistsService = userExistsService;
+        }
 
         public void ChangeUserSettingsLocation(Models.User user, string location)
         {
             try
             {
-                if (_ifUserExistsService.UserExistsByUser(user))
+                if (_userExistsService.UserExistsByUser(user))
                 {
                     user.UserSettings.Location = location;
                 }
@@ -28,7 +34,7 @@ namespace WeatherAlertBot.Services
         {
             try
             {
-                if (_ifUserExistsService.UserExistsByUser(user))
+                if (_userExistsService.UserExistsByUser(user))
                 {
                     user.UserSettings.UpdateInterval = updateInterval;
                 }
@@ -42,7 +48,7 @@ namespace WeatherAlertBot.Services
         {
             try
             {
-                if (_ifUserExistsService.UserExistsByUser(user))
+                if (_userExistsService.UserExistsByUser(user))
                 {
                     user.UserSettings.MorningTime = morningTime;
                 }

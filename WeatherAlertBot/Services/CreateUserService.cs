@@ -1,15 +1,21 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Db;
+using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
 
 namespace WeatherAlertBot.Services
 {
-    public class CreateUserService
+    public class CreateUserService : ICreateUserService
     {
         private readonly UserContext _userContext;
         private Logger<UserExistsService> _logger;
-        private UserExistsService _userExistsService;
+        private IUserExistsService _userExistsService;
+
+        public CreateUserService(IUserExistsService userExistsService)
+        {
+            _userExistsService = userExistsService;
+        }
 
         public void CreateUser(Update update)
         {

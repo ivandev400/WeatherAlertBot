@@ -12,7 +12,12 @@ namespace WeatherAlertBot.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private UpdateDistributor<CommandExecutor> updateDistributor = new UpdateDistributor<CommandExecutor>();
+        private UpdateDistributor<CommandExecutor> updateDistributor;
+
+        public BotController(UpdateDistributor<CommandExecutor> updateDistributor)
+        {
+            this.updateDistributor = updateDistributor;
+        }
 
         [HttpPost]
         public async void Post(Update update)

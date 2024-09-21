@@ -6,7 +6,13 @@ using WeatherAlertBot.Services;
 public class ReturnSettingsService : IReturnSettingsService
 {
     private readonly UserContext _userContext;
-    private UserExistsService _userExistsService = new UserExistsService();
+    private IUserExistsService _userExistsService;
+
+    public ReturnSettingsService(UserContext userContext, IUserExistsService userExistsService)
+    {
+        _userContext = userContext;
+        _userExistsService = userExistsService;
+    }
 
     public string ReturnSettings(Update update)
     {
