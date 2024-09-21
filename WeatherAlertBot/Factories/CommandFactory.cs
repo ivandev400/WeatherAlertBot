@@ -16,10 +16,6 @@ namespace WeatherAlertBot.Factories
                 case SettingsCommand settingsCommand:
                     settingsCommand.SettingsService = serviceProvider.GetRequiredService<ReturnSettingsService>();
                     break;
-                case StartCommand startCommand:
-                    startCommand.CreateUserService = serviceProvider.GetRequiredService<CreateUserService>();
-                    startCommand.IfUserExistsService = serviceProvider.GetRequiredService<IfUserExistsService>();
-                    break;
             }
 
             return command;

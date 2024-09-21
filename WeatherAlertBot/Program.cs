@@ -16,8 +16,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-builder.Services.AddScoped<IfUserExistsService>();
-builder.Services.AddScoped<ReturnSettingsService>();
+builder.Services.AddScoped<IUserExistsService, UserExistsService>();
+builder.Services.AddScoped<IReturnSettingsService, ReturnSettingsService>();
 builder.Services.AddScoped<CreateUserService>();
 builder.Services.AddScoped<ChangeUserSettingsService>();
 

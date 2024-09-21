@@ -1,19 +1,14 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Db;
+using WeatherAlertBot.Interfaces;
 
 namespace WeatherAlertBot.Services
 {
-    public class IfUserExistsService
+    public class UserExistsService : IUserExistsService
     {
         private readonly UserContext _userContext;
-        private Logger<IfUserExistsService> _logger;
-
-        public IfUserExistsService(UserContext userContext, Logger<IfUserExistsService> logger)
-        {
-            _userContext = userContext;
-            _logger = logger;
-        }
+        private Logger<UserExistsService> _logger;
 
         public bool UserExistsByUpdate(Update update)
         {

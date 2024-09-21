@@ -8,15 +8,8 @@ namespace WeatherAlertBot.Services
     public class CreateUserService
     {
         private readonly UserContext _userContext;
-        private Logger<IfUserExistsService> _logger;
-        private IfUserExistsService _userExistsService;
-
-        public CreateUserService(UserContext userContext, Logger<IfUserExistsService> logger, IfUserExistsService userExistsService)
-        {
-            _userContext = userContext;
-            _logger = logger;
-            _userExistsService = userExistsService;
-        }
+        private Logger<UserExistsService> _logger;
+        private UserExistsService _userExistsService;
 
         public void CreateUser(Update update)
         {
