@@ -24,21 +24,30 @@ namespace WeatherAlertBot.Migrations
 
             modelBuilder.Entity("WeatherAlertBot.Models.User", b =>
                 {
-                    b.Property<long>("ChatId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ChatId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.HasKey("ChatId");
+                    b.Property<long>("ChatId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserSettingsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("WeatherAlertBot.Models.UserSettings", b =>
                 {
-                    b.Property<long>("UserID")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -51,7 +60,13 @@ namespace WeatherAlertBot.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserID");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("UserSettings");
                 });
@@ -60,7 +75,7 @@ namespace WeatherAlertBot.Migrations
                 {
                     b.HasOne("WeatherAlertBot.Models.User", "User")
                         .WithOne("UserSettings")
-                        .HasForeignKey("WeatherAlertBot.Models.UserSettings", "UserID")
+                        .HasForeignKey("WeatherAlertBot.Models.UserSettings", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

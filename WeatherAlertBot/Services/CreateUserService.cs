@@ -17,28 +17,26 @@ namespace WeatherAlertBot.Services
             this.userExistsService = userExistsService;
         }
 
-        public string CreateUser(Update update)
+        public void CreateUser(Update update)
         {
             if (!userExistsService.UserExistsByUpdate(update))
             {
+                var newUserSettings = new UserSettings
+                {
+                    Location = "Kyiv",
+                    UpdateInterval = "",
+                    MorningTime = new TimeOnly(8, 0, 0)
+                };
+
                 var newUser = new Models.User
                 {
                     ChatId = update.Message.Chat.Id,
-                    UserSettings = new UserSettings
-                    {
-                        UserID = update.Message.Chat.Id,
-                        Location = "Kyiv",
-                        UpdateInterval = "",
-                        MorningTime = new TimeOnly(8, 0, 11),
-                    }
+                    UserSettings = newUserSettings
                 };
-
                 userContext.Users.Add(newUser);
                 userContext.SaveChanges();
-
-                return "I'm here";
             }
-            return "something wrong :(";
+            return;
         }
     }
 }

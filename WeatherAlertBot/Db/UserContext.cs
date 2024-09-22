@@ -14,8 +14,13 @@ namespace WeatherAlertBot.Db
         {
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserSettings)
-                .WithOne(us => us.User) 
-                .HasForeignKey<UserSettings>(us => us.UserID); 
+                .WithOne(us => us.User)
+                .HasForeignKey<User>(u => u.UserSettingsId);
+
+            modelBuilder.Entity<UserSettings>()
+                .HasOne(us => us.User)
+                .WithOne(u => u.UserSettings)
+                .HasForeignKey<UserSettings>(us => us.UserId);
         }
     }
 }

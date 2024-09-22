@@ -5,7 +5,8 @@ namespace WeatherAlertBot.Models
     public class UserSettings
     {
         [Key]
-        public long UserID { get; set; }
+        public long Id { get; set; }
+        public long UserId { get; set; }
         public string Location { get; set; }
         public string UpdateInterval { get; set; }
         public TimeOnly MorningTime { get; set; }

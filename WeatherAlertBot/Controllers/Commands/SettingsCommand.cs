@@ -22,9 +22,9 @@ namespace WeatherAlertBot.Controllers.Commands
 		public async Task Execute(Update update)
 		{
 			long chatId = update.Message.Chat.Id;
-            var result = settingsService.ReturnSettings(update);
+            settingsService.ReturnSettings(update);
 
-			await Client.SendTextMessageAsync(chatId, result);
+			await Client.SendTextMessageAsync(chatId, CommandDescription);
 		}
 	}
 }
