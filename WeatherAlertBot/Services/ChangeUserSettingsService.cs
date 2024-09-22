@@ -5,54 +5,55 @@ namespace WeatherAlertBot.Services
 {
     public class ChangeUserSettingsService : IChangeUserSettingsService
     {
-        private Logger<UserExistsService> _logger;
-        private IUserExistsService _userExistsService;
+        private Logger<UserExistsService> logger;
+        private IUserExistsService userExistsService;
 
-        public ChangeUserSettingsService(IUserExistsService userExistsService)
+        public ChangeUserSettingsService(IUserExistsService userExistsService, Logger<UserExistsService> logger)
         {
-            _userExistsService = userExistsService;
+            this.userExistsService = userExistsService;
+            this.logger = logger;
         }
 
         public void ChangeUserSettingsLocation(User user, string location)
         {
             try
             {
-                if (_userExistsService.UserExistsByUser(user))
+                if (userExistsService.UserExistsByUser(user))
                 {
                     user.UserSettings.Location = location;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Can't change user location setting, {ex}");
+                logger.LogError($"Can't change user location setting, {ex}");
             }
         }
         public void ChangeUserSettingsUpdateInterval(User user, string updateInterval)
         {
             try
             {
-                if (_userExistsService.UserExistsByUser(user))
+                if (userExistsService.UserExistsByUser(user))
                 {
                     user.UserSettings.UpdateInterval = updateInterval;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Can't change user location setting, {ex}");
+                logger.LogError($"Can't change user location setting, {ex}");
             }
         }
         public void ChangeUserSettingsLocation(User user, TimeOnly morningTime)
         {
             try
             {
-                if (_userExistsService.UserExistsByUser(user))
+                if (userExistsService.UserExistsByUser(user))
                 {
                     user.UserSettings.MorningTime = morningTime;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Can't change user location setting, {ex}");
+                logger.LogError($"Can't change user location setting, {ex}");
             }
         }
     }
