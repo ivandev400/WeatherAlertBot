@@ -16,6 +16,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
+builder.Services.AddDbContext<UserContext>(options =>
+       options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
+
 builder.Services.AddScoped<IUserExistsService, UserExistsService>();
 builder.Services.AddScoped<IReturnSettingsService, ReturnSettingsService>();
 builder.Services.AddScoped<ICreateUserService, CreateUserService>();
@@ -29,9 +32,6 @@ builder.Services.AddTransient<CommandExecutor>();
 builder.Services.AddTransient<UpdateDistributor<CommandExecutor>>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
-
-builder.Services.AddDbContext<UserContext>(options =>
-       options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
 
 builder.Logging.AddConsole();

@@ -8,33 +8,37 @@ namespace WeatherAlertBot.Services
 {
     public class CreateUserService : ICreateUserService
     {
-        private readonly UserContext _userContext;
-        private Logger<UserExistsService> _logger;
-        private IUserExistsService _userExistsService;
+        private readonly UserContext userContext;
+        private IUserExistsService userExistsService;
 
-        public CreateUserService(IUserExistsService userExistsService)
+        public CreateUserService(UserContext userContext, IUserExistsService userExistsService)
         {
-            _userExistsService = userExistsService;
+            this.userContext = userContext;
+            this.userExistsService = userExistsService;
         }
 
-        public void CreateUser(Update update)
+        public string CreateUser(Update update)
         {
-            if (_userExistsService.UserExistsByUpdate(update))
-            {
-                _logger.LogWarning("The user already exists");
-                return;
-            }
-            if(update.Message != null)
+            if (!userExistsService.UserExistsByUpdate(update))
             {
                 var newUser = new Models.User
                 {
                     ChatId = update.Message.Chat.Id,
-                    UserSettings = new UserSettings()
+                    UserSettings = new UserSettings
+                    {
+                        UserID = update.Message.Chat.Id,
+                        Location = "Kyiv",
+                        UpdateInterval = "",
+                        MorningTime = new TimeOnly(8, 0, 11),
+                    }
                 };
 
-                _userContext.Users.Add(newUser);
-                _userContext.SaveChanges();
+                userContext.Users.Add(newUser);
+                userContext.SaveChanges();
+
+                return "I'm here";
             }
+            return "something wrong :(";
         }
     }
 }

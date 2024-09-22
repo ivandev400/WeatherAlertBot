@@ -5,21 +5,21 @@ using WeatherAlertBot.Services;
 
 public class ReturnSettingsService : IReturnSettingsService
 {
-    private readonly UserContext _userContext;
-    private IUserExistsService _userExistsService;
+    private readonly UserContext userContext;
+    private IUserExistsService userExistsService;
 
     public ReturnSettingsService(UserContext userContext, IUserExistsService userExistsService)
     {
-        _userContext = userContext;
-        _userExistsService = userExistsService;
+        this.userContext = userContext;
+        this.userExistsService = userExistsService;
     }
 
     public string ReturnSettings(Update update)
     {
-        if (_userExistsService.UserExistsByUpdate(update) && update.Message != null)
+        if (userExistsService.UserExistsByUpdate(update) && update.Message != null)
         {
             var chatId = update.Message.Chat.Id;
-            var user = _userContext.Users
+            var user = userContext.Users
                 .Where(x => x.ChatId == chatId)
                 .First();
 

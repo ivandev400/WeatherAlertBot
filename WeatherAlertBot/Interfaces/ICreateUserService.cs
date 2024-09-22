@@ -4,6 +4,6 @@ namespace WeatherAlertBot.Interfaces
 {
     public interface ICreateUserService
     {
-        public void CreateUser(Update update);
+        public string CreateUser(Update update);
     }
 }

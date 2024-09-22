@@ -1,8 +1,5 @@
-﻿using Telegram.Bot;
-using Telegram.Bot.Types;
-using WeatherAlertBot.Db;
-using WeatherAlertBot.Interfaces;
-using WeatherAlertBot.Services;
+﻿using WeatherAlertBot.Interfaces;
+using WeatherAlertBot.Models;
 
 namespace WeatherAlertBot.Services
 {
@@ -16,7 +13,7 @@ namespace WeatherAlertBot.Services
             _userExistsService = userExistsService;
         }
 
-        public void ChangeUserSettingsLocation(Models.User user, string location)
+        public void ChangeUserSettingsLocation(User user, string location)
         {
             try
             {
@@ -30,7 +27,7 @@ namespace WeatherAlertBot.Services
                 _logger.LogError($"Can't change user location setting, {ex}");
             }
         }
-        public void ChangeUserSettingsUpdateInterval(Models.User user, string updateInterval)
+        public void ChangeUserSettingsUpdateInterval(User user, string updateInterval)
         {
             try
             {
@@ -44,7 +41,7 @@ namespace WeatherAlertBot.Services
                 _logger.LogError($"Can't change user location setting, {ex}");
             }
         }
-        public void ChangeUserSettingsLocation(Models.User user, TimeOnly morningTime)
+        public void ChangeUserSettingsLocation(User user, TimeOnly morningTime)
         {
             try
             {
