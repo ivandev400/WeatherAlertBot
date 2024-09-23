@@ -14,17 +14,12 @@ namespace WeatherAlertBot.Controllers.Commands
 
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
-        public IReturnSettingsService settingsService;
-
-        public CurrentWeatherCommand(IReturnSettingsService settingsService)
-        {
-            this.settingsService = settingsService;
-        }
+        
 
         public async Task Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
-            var userSettings =settingsService.ReturnSettings(update);
+            var userSettings = new UserSettings { Location = "Kyiv" };
             var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
             string message = $"Time: {weatherResult.Time.ToString("HH:mm")}\n" +

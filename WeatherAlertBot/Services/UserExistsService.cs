@@ -7,13 +7,12 @@ namespace WeatherAlertBot.Services
 {
     public class UserExistsService : IUserExistsService
     {
-        private readonly UserContext userContext;
-        private Logger<UserExistsService> logger;
+        private readonly UserContext _userContext;
+        private Logger<UserExistsService> _logger;
 
-        public UserExistsService(UserContext userContext, Logger<UserExistsService> logger)
+        public UserExistsService(UserContext userContext)
         {
-            this.userContext = userContext;
-            this.logger = logger;
+            _userContext = userContext;
         }
 
         public bool UserExistsByUpdate(Update update)
@@ -23,14 +22,14 @@ namespace WeatherAlertBot.Services
                 if (update.Message != null)
                 {
                     var userId = update.Message.Chat.Id;
-                    bool isExists = userContext.Users
+                    bool isExists = _userContext.Users
                         .Any(x => x.ChatId == userId);
 
                     return isExists;
                 }  
             }catch (Exception ex)
             {
-                logger.LogError($"Can't complete UserExistsAsync operation, {ex}");
+                _logger.LogError($"Can't complete UserExistsAsync operation, {ex}");
             }
             return false;
         }
@@ -41,7 +40,7 @@ namespace WeatherAlertBot.Services
                 if (user != null)
                 {
                     var userId = user.ChatId;
-                    bool isExists = userContext.Users
+                    bool isExists = _userContext.Users
                         .Any(x => x.ChatId == userId);
 
                     return isExists;
@@ -49,7 +48,7 @@ namespace WeatherAlertBot.Services
             }
             catch (Exception ex)
             {
-                logger.LogError($"Can't complete UserExistsAsync operation, {ex}");
+                _logger.LogError($"Can't complete UserExistsAsync operation, {ex}");
             }
             return false;
         }
