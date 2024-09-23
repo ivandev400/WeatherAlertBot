@@ -23,10 +23,12 @@ builder.Services.AddScoped<IUserExistsService, UserExistsService>();
 builder.Services.AddScoped<IReturnSettingsService, ReturnSettingsService>();
 builder.Services.AddScoped<ICreateUserService, CreateUserService>();
 builder.Services.AddScoped<IChangeUserSettingsService, ChangeUserSettingsService>();
+builder.Services.AddScoped<IGetUserService, GetUserService>();
 
 builder.Services.AddTransient<ICommand, StartCommand>();
 builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
 builder.Services.AddTransient<ICommand, SettingsCommand>();
+builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
 
 builder.Services.AddTransient<CommandExecutor>();
 builder.Services.AddTransient<UpdateDistributor<CommandExecutor>>();

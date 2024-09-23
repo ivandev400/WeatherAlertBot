@@ -1,6 +1,7 @@
 ﻿using Telegram.Bot.Types;
 using WeatherAlertBot.Db;
 using WeatherAlertBot.Interfaces;
+using WeatherAlertBot.Models;
 using WeatherAlertBot.Services;
 
 public class ReturnSettingsService : IReturnSettingsService
@@ -14,7 +15,7 @@ public class ReturnSettingsService : IReturnSettingsService
         this.userExistsService = userExistsService;
     }
 
-    public string ReturnSettings(Update update)
+    public string ReturnSettingsToString(Update update)
     {
         if (userExistsService.UserExistsByUpdate(update) && update.Message != null)
         {
@@ -34,5 +35,21 @@ public class ReturnSettingsService : IReturnSettingsService
             return result;
         }
         return "can't return settings";
+    }
+    public UserSettings ReturnSettings(Update update)
+    {
+        var defaultSettings = new UserSettings { Location = "Kyiv" };
+        if (userExistsService.UserExistsByUpdate(update) && update.Message != null)
+        {
+            var chatId = update.Message.Chat.Id;
+            var user = userContext.Users
+                .Where(x => x.ChatId == chatId)
+                .First();
+            var settings = userContext.UserSettings
+                .Where(x => x.UserId == user.Id)
+                .First();
+            return settings;
+        }
+        return defaultSettings;
     }
 }
