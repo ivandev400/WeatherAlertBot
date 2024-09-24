@@ -33,7 +33,7 @@ builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
 builder.Services.AddTransient<IListener, ChangeLocationCommand>();
 
 builder.Services.AddTransient<CommandExecutor>();
-builder.Services.AddTransient<UpdateDistributor<CommandExecutor>>();
+builder.Services.AddSingleton<UpdateDistributor<CommandExecutor>>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 

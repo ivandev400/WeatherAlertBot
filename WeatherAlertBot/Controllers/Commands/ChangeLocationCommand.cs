@@ -24,13 +24,10 @@ namespace WeatherAlertBot.Controllers.Commands
         }
 
         public string? location = null;
-        public User User 
 
         public async Task Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
-            User = getUserService.GetUser(update);
-
             Executor.StartListen(this);
 
             await Client.SendTextMessageAsync(chatId, "Введіть місто. Send city name");
@@ -38,11 +35,12 @@ namespace WeatherAlertBot.Controllers.Commands
         public async Task GetUpdate(Update update)
         {
             long chatId = update.Message.Chat.Id;
+            var user = getUserService.GetUser(update);
+            
             if (update.Message.Text == null)
             {
                 return;
             }
-            var user = getUserService.GetUser(update);
 
             if (user == null)
             {
@@ -55,12 +53,14 @@ namespace WeatherAlertBot.Controllers.Commands
             {
                 location = update.Message.Text;
             }
-            else
-            {
-                changeSettings.ChangeUserSettingsLocation(user, location);
-                await Client.SendTextMessageAsync(chatId, "Операція успішна. Success");
-                Executor.StopListen();
-            }
+
+            await Client.SendTextMessageAsync(chatId, "Changing the user location");
+
+            changeSettings.ChangeUserSettingsLocation(user, location);
+            location = null;
+
+            await Client.SendTextMessageAsync(chatId, "Операція успішна. Success");
+            Executor.StopListen();
         }
     }
 }

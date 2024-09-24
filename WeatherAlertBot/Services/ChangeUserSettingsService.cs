@@ -1,58 +1,66 @@
-﻿using WeatherAlertBot.Interfaces;
+﻿using WeatherAlertBot.Db;
+using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
 
 namespace WeatherAlertBot.Services
 {
     public class ChangeUserSettingsService : IChangeUserSettingsService
     {
-        private Logger<UserExistsService> _logger;
-        private IUserExistsService _userExistsService;
+        private IUserExistsService userExistsService;
+        private UserContext userContext;
 
-        public ChangeUserSettingsService(IUserExistsService userExistsService)
+        public ChangeUserSettingsService(IUserExistsService userExistsService, UserContext userContext)
         {
-            _userExistsService = userExistsService;
+            this.userExistsService = userExistsService;
+            this.userContext = userContext;
         }
 
         public void ChangeUserSettingsLocation(User user, string location)
         {
             try
             {
-                if (_userExistsService.UserExistsByUser(user))
+                if (userExistsService.UserExistsByUser(user))
                 {
-                    user.UserSettings.Location = location;
+                    var settings = userContext.UserSettings.First(u => u.UserId == user.Id);
+                    settings.Location = location;
+                    userContext.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Can't change user location setting, {ex}");
+                return;
             }
         }
         public void ChangeUserSettingsUpdateInterval(User user, string updateInterval)
         {
             try
             {
-                if (_userExistsService.UserExistsByUser(user))
+                if (userExistsService.UserExistsByUser(user))
                 {
-                    user.UserSettings.UpdateInterval = updateInterval;
+                    var settings = userContext.UserSettings.First(u => u.UserId == user.Id);
+                    settings.UpdateInterval = updateInterval;
+                    userContext.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Can't change user location setting, {ex}");
+                return;
             }
         }
         public void ChangeUserSettingsLocation(User user, TimeOnly morningTime)
         {
             try
             {
-                if (_userExistsService.UserExistsByUser(user))
+                if (userExistsService.UserExistsByUser(user))
                 {
-                    user.UserSettings.MorningTime = morningTime;
+                    var settings = userContext.UserSettings.First(u => u.UserId == user.Id);
+                    settings.MorningTime = morningTime;
+                    userContext.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Can't change user location setting, {ex}");
+                return; 
             }
         }
     }

@@ -7,6 +7,6 @@ namespace WeatherAlertBot.Interfaces
     {
         public Task GetUpdate(Update update);
 
-        public CommandExecutor Executor { get; }
+        public CommandExecutor Executor { get; set; }
     }
 }
