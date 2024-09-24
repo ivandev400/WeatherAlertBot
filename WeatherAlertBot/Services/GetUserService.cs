@@ -1,24 +1,29 @@
 ﻿using Telegram.Bot.Types;
 using WeatherAlertBot.Db;
 using WeatherAlertBot.Interfaces;
+using User = WeatherAlertBot.Models.User;
+
 namespace WeatherAlertBot.Services
 {
     public class GetUserService : IGetUserService
     {
         private readonly UserContext userContext;
-        private Logger<UserExistsService> logger;
         private IUserExistsService userExistsService;
-        public GetUserService(UserContext userContext, Logger<UserExistsService> logger, IUserExistsService userExistsService)
+        private ICreateUserService createUserService;
+
+        public GetUserService(UserContext userContext, IUserExistsService userExistsService,ICreateUserService createUserService)
         {
             this.userContext = userContext;
-            this.logger = logger;
             this.userExistsService = userExistsService;
+            this.createUserService = createUserService;
         }
-        public Models.User GetUser(Update update)
+
+        public User GetUser(Update update)
         {
+            long chatId = update.Message.Chat.Id;
+
             if (userExistsService.UserExistsByUpdate(update))
-            {
-                long chatId = update.Message.Chat.Id;
+            { 
                 var user = userContext.Users
                     .Where(user => user.ChatId == chatId)
                     .First();

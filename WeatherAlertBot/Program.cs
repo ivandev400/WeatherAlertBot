@@ -30,6 +30,8 @@ builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
 builder.Services.AddTransient<ICommand, SettingsCommand>();
 builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
 
+builder.Services.AddTransient<IListener, ChangeLocationCommand>();
+
 builder.Services.AddTransient<CommandExecutor>();
 builder.Services.AddTransient<UpdateDistributor<CommandExecutor>>();
 

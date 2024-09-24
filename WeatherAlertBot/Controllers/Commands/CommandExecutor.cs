@@ -10,7 +10,16 @@ namespace WeatherAlertBot.Controllers.Commands
 
         public CommandExecutor(IEnumerable<ICommand> commands)
         {
-            this.commands = commands;
+            this.commands = commands;  
+            foreach(var command in commands)
+            {
+                switch (command)
+                {
+                    case ChangeLocationCommand changeLocationCommand:
+                        changeLocationCommand.Executor = this;
+                        break;
+                }
+            }
         }
         public async Task GetUpdate(Update update)
         {
