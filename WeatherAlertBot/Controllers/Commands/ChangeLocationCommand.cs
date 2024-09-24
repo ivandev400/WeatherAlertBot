@@ -2,7 +2,6 @@
 using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
-using User = WeatherAlertBot.Models.User;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -53,9 +52,6 @@ namespace WeatherAlertBot.Controllers.Commands
             {
                 location = update.Message.Text;
             }
-
-            await Client.SendTextMessageAsync(chatId, "Changing the user location");
-
             changeSettings.ChangeUserSettingsLocation(user, location);
             location = null;
 
