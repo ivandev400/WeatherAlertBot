@@ -9,7 +9,7 @@ namespace WeatherAlertBot.Controllers.Commands
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/changelocation";
-        public string CommandDescription => null;
+        public string CommandDescription => CommandDescriptions.ChangeLocation;
 
         public IChangeUserSettingsService changeSettings;
         public IGetUserService getUserService;

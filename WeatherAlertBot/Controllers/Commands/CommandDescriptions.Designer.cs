@@ -61,13 +61,47 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is Weather Alert Bot(or storm watch).This Bot was created to help you to know weather at time. Here you can use different commands: /start - launch the bot,   /currentweather - immidiately send you message with weather info in location that you have set using command /settings (default location is Kyiv).
-        ///
-        ///Это Weather Alert Bot (или штормовой дозор). Этот бот был создан, чтобы помочь вам узнать погоду в данный момент. Здесь вы можете использовать различные команды: /start - запустить бота, /currentwea [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to 🌍Позволяет поменять место, откуда вы хотите узнать погоду. (Set the location from where you want know the weather) 🌎.
         /// </summary>
-        public static string StartCommandDescription {
+        public static string ChangeLocation {
             get {
-                return ResourceManager.GetString("StartCommandDescription", resourceCulture);
+                return ResourceManager.GetString("ChangeLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🌞Возвращает погоду. (Return the weather)🌞.
+        /// </summary>
+        public static string CurrentWeather {
+            get {
+                return ResourceManager.GetString("CurrentWeather", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🙈Описывает доступные комманды. (Show all awailable commands)🙈.
+        /// </summary>
+        public static string HelpCommand {
+            get {
+                return ResourceManager.GetString("HelpCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚙️Показывает вашы настройки. (Show your settings)⚙️.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🚀Запускает бота. (Lauching the bot)🚀.
+        /// </summary>
+        public static string StartCommand {
+            get {
+                return ResourceManager.GetString("StartCommand", resourceCulture);
             }
         }
     }

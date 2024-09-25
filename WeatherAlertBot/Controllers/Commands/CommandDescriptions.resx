@@ -117,9 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="StartCommandDescription" xml:space="preserve">
-    <value>This is Weather Alert Bot(or storm watch).This Bot was created to help you to know weather at time. Here you can use different commands: /start - launch the bot,   /currentweather - immidiately send you message with weather info in location that you have set using command /settings (default location is Kyiv).
-
-Это Weather Alert Bot (или штормовой дозор). Этот бот был создан, чтобы помочь вам узнать погоду в данный момент. Здесь вы можете использовать различные команды: /start - запустить бота, /currentweather - немедленно отправить вам сообщение с информацией о погоде в месте, которое вы указали с помощью команды /settings (местоположение по умолчанию - Киев).</value>
+  <data name="ChangeLocation" xml:space="preserve">
+    <value>🌍Позволяет поменять место, откуда вы хотите узнать погоду. (Set the location from where you want know the weather) 🌎</value>
+  </data>
+  <data name="CurrentWeather" xml:space="preserve">
+    <value>🌞Возвращает погоду. (Return the weather)🌞</value>
+  </data>
+  <data name="HelpCommand" xml:space="preserve">
+    <value>🙈Описывает доступные комманды. (Show all awailable commands)🙈</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>⚙️Показывает вашы настройки. (Show your settings)⚙️</value>
+  </data>
+  <data name="StartCommand" xml:space="preserve">
+    <value>🚀Запускает бота. (Lauching the bot)🚀</value>
   </data>
 </root>

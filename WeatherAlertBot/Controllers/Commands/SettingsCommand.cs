@@ -10,7 +10,7 @@ namespace WeatherAlertBot.Controllers.Commands
 	{
 		public TelegramBotClient Client => Bot.GetTelegramBot();
 		public string CommandName => "/settings";
-		public string CommandDescription => null;
+		public string CommandDescription => CommandDescriptions.Settings;
 
 		public IReturnSettingsService settingsService;
 

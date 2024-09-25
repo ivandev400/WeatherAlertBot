@@ -10,7 +10,7 @@ namespace WeatherAlertBot.Controllers.Commands
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/currentweather";
-        public string CommandDescription => null;
+        public string CommandDescription => CommandDescriptions.CurrentWeather;
 
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
