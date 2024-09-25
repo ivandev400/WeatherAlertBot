@@ -61,7 +61,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🌍Позволяет поменять место, откуда вы хотите узнать погоду. (Set the location from where you want know the weather) 🌎.
+        ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎.
         /// </summary>
         public static string ChangeLocation {
             get {
@@ -70,7 +70,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🌞Возвращает погоду. (Return the weather).
+        ///   Looks up a localized string similar to 🌞Надсилає погоду. (Return the weather).
         /// </summary>
         public static string CurrentWeather {
             get {
@@ -79,7 +79,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🙈Описывает доступные комманды. (Show all awailable commands).
+        ///   Looks up a localized string similar to 🙈Дає опис всіх доступних команд. (Show all awailable commands).
         /// </summary>
         public static string HelpCommand {
             get {
@@ -88,7 +88,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ⚙️Показывает вашы настройки. (Show your settings).
+        ///   Looks up a localized string similar to ⚙️Показує ваші налаштування. (Show your settings).
         /// </summary>
         public static string Settings {
             get {
@@ -97,7 +97,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🚀Запускает бота. (Lauching the bot).
+        ///   Looks up a localized string similar to 🚀Запускає бота. (Lauching the bot).
         /// </summary>
         public static string StartCommand {
             get {

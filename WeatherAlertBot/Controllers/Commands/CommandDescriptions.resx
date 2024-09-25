@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangeLocation" xml:space="preserve">
-    <value>🌍Позволяет поменять место, откуда вы хотите узнать погоду. (Set the location from where you want know the weather) 🌎</value>
+    <value>🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎</value>
   </data>
   <data name="CurrentWeather" xml:space="preserve">
-    <value>🌞Возвращает погоду. (Return the weather)</value>
+    <value>🌞Надсилає погоду. (Return the weather)</value>
   </data>
   <data name="HelpCommand" xml:space="preserve">
-    <value>🙈Описывает доступные комманды. (Show all awailable commands)</value>
+    <value>🙈Дає опис всіх доступних команд. (Show all awailable commands)</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>⚙️Показывает вашы настройки. (Show your settings)</value>
+    <value>⚙️Показує ваші налаштування. (Show your settings)</value>
   </data>
   <data name="StartCommand" xml:space="preserve">
-    <value>🚀Запускает бота. (Lauching the bot)</value>
+    <value>🚀Запускає бота. (Lauching the bot)</value>
   </data>
 </root>
