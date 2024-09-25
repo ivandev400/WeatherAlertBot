@@ -121,15 +121,15 @@
     <value>🌍Позволяет поменять место, откуда вы хотите узнать погоду. (Set the location from where you want know the weather) 🌎</value>
   </data>
   <data name="CurrentWeather" xml:space="preserve">
-    <value>🌞Возвращает погоду. (Return the weather)🌞</value>
+    <value>🌞Возвращает погоду. (Return the weather)</value>
   </data>
   <data name="HelpCommand" xml:space="preserve">
-    <value>🙈Описывает доступные комманды. (Show all awailable commands)🙈</value>
+    <value>🙈Описывает доступные комманды. (Show all awailable commands)</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>⚙️Показывает вашы настройки. (Show your settings)⚙️</value>
+    <value>⚙️Показывает вашы настройки. (Show your settings)</value>
   </data>
   <data name="StartCommand" xml:space="preserve">
-    <value>🚀Запускает бота. (Lauching the bot)🚀</value>
+    <value>🚀Запускает бота. (Lauching the bot)</value>
   </data>
 </root>

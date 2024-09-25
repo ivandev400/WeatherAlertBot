@@ -29,7 +29,7 @@ namespace WeatherAlertBot.Controllers.Commands
             long chatId = update.Message.Chat.Id;
             Executor.StartListen(this);
 
-            await Client.SendTextMessageAsync(chatId, "Введіть місто. Send city name");
+            await Client.SendTextMessageAsync(chatId, "🌆 Введіть місто. Send city name");
         }
         public async Task GetUpdate(Update update)
         {
@@ -43,7 +43,7 @@ namespace WeatherAlertBot.Controllers.Commands
 
             if (user == null)
             {
-                await Client.SendTextMessageAsync(chatId, "Вас нема в базі даних, спробуйте команду /start. Error, try start command.");
+                await Client.SendTextMessageAsync(chatId, "☢️ Вас нема в базі даних, спробуйте команду /start. Error, try start command.");
                 Executor.StopListen();
                 return;
             }
@@ -55,7 +55,7 @@ namespace WeatherAlertBot.Controllers.Commands
             changeSettings.ChangeUserSettingsLocation(user, location);
             location = null;
 
-            await Client.SendTextMessageAsync(chatId, "Операція успішна. Success");
+            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success");
             Executor.StopListen();
         }
     }
