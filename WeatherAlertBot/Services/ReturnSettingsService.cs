@@ -30,7 +30,7 @@ public class ReturnSettingsService : IReturnSettingsService
                 .First();
 
             string result = $"Location: {settings.Location} \n" +
-                $"Update interval: {settings.UpdateInterval} \n" +
+                $"Notification: {settings.UpdateInterval} \n" +
                 $"Morning time: {settings.MorningTime}";
             return result;
         }

@@ -32,5 +32,18 @@ namespace WeatherAlertBot.Controllers.Commands
                 OneTimeKeyboard = false
             };
         }
+
+        public ReplyKeyboardMarkup GetBoolMarkup()
+        {
+            return new ReplyKeyboardMarkup(new[]
+            {
+                new KeyboardButton[] { "YES" },
+                new KeyboardButton[] { "NO" },
+            })
+            {
+                ResizeKeyboard = true,
+                OneTimeKeyboard = false
+            };
+        }
     }
 }

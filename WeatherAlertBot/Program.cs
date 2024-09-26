@@ -16,6 +16,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
+static IHostBuilder CreateHostBuilder(string[] args) =>
+       Host.CreateDefaultBuilder(args)
+           .ConfigureServices((hostContext, services) =>
+           {
+               services.AddHostedService<MorningNotificationService>(); 
+                                                                       
+           });
+
 builder.Services.AddDbContext<UserContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
@@ -30,6 +38,8 @@ builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
 builder.Services.AddTransient<ICommand, SettingsCommand>();
 builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
 builder.Services.AddTransient<ICommand, ChangeMorningTimeCommand>();
+builder.Services.AddTransient<ICommand, DailyWeatherCommand>();
+builder.Services.AddTransient<ICommand, AnableNotificationCommand>();
 builder.Services.AddTransient<ICommand, HelpCommand>();
 
 builder.Services.AddTransient<IReplyKeyboard, ReplyKeyboard>();

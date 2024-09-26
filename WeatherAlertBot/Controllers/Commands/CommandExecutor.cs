@@ -21,6 +21,9 @@ namespace WeatherAlertBot.Controllers.Commands
                     case ChangeMorningTimeCommand changeMorningTimeCommand:
                         changeMorningTimeCommand.Executor = this;
                         break;
+                    case AnableNotificationCommand anableNotificationCommand:
+                        anableNotificationCommand.Executor = this;
+                        break;
                 }
             }
         }

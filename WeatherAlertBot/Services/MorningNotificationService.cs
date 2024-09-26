@@ -2,51 +2,63 @@
 using WeatherAlertBot.Db;
 using WeatherAlertBot.Interfaces;
 using Telegram.Bot.Types;
-using User = WeatherAlertBot.Models.User;
 
 namespace WeatherAlertBot.Services
 {
-    public class MorningNotificationService : IMorningNotificationService
+    public class MorningNotificationService : BackgroundService
     {
         private readonly UserContext userContext;
-        public CurrentWeatherCommand currentWeatherCommand;
-        public DailyWeatherCommand dailyWeatherCommand;
+        public CurrentWeatherCommand CurrentWeatherCommand;
+        public DailyWeatherCommand DailyWeatherCommand;
 
-        public MorningNotificationService(CurrentWeatherCommand currentWeatherCommand, DailyWeatherCommand dailyWeatherCommand)
+        public MorningNotificationService(UserContext userContext, IGetUserService getUserService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
         {
-            this.currentWeatherCommand = currentWeatherCommand;
-            this.dailyWeatherCommand = dailyWeatherCommand;
+            this.userContext = userContext;
+            CurrentWeatherCommand = new CurrentWeatherCommand(settingsService, replyMarkup);
+            DailyWeatherCommand = new DailyWeatherCommand(settingsService, replyMarkup, getUserService);
         }
 
-        public async Task GetMorningNotification(User user, Update update)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            if (user != null)
+            while (!stoppingToken.IsCancellationRequested)
             {
-                var chatId = user.ChatId;
+                await CheckAndSendMorningNotifications();
+                await Task.Delay(TimeSpan.FromSeconds(20), stoppingToken);
+            }
+        }
+
+        private async Task CheckAndSendMorningNotifications()
+        {
+            var users = userContext.Users.ToList();
+
+            foreach (var user in users)
+            {
                 var settings = userContext.UserSettings
-                    .First(u => u.UserId == user.Id);
+                    .FirstOrDefault(u => u.UserId == user.Id);
+
+                if (settings == null) continue;
 
                 TimeOnly morningTime = settings.MorningTime;
                 string updateInterval = settings.UpdateInterval;
 
-                while (updateInterval == "Yes")
+                if (updateInterval == "Yes")
                 {
-                    TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-
-                    if (currentTime.Hour ==  morningTime.Hour && currentTime.Minute == morningTime.Minute)
+                    TimeOnly.TryParse($"{DateTime.Now}", out TimeOnly currentTime);
+                    if (currentTime.Hour == morningTime.Hour && Math.Abs(currentTime.Minute - morningTime.Minute) <= 2)
                     {
-                        var newUpdate = update;
-                        await currentWeatherCommand.Execute(update);
-                        await dailyWeatherCommand.Execute(update);
-
-                        await Task.Delay(TimeSpan.FromMinutes(1));
+                        Update update = new Update
+                        {
+                            Message = new Message
+                            {
+                                Chat = new Chat
+                                {
+                                    Id = user.ChatId
+                                }
+                            }
+                        }; 
+                        await CurrentWeatherCommand.Execute(update);
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(30));
                 }
-                return;
-            } else
-            {
-                return;
             }
         }
     }

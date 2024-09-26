@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AnableNotification" xml:space="preserve">
+    <value>Дозволяє відправляти погоду на встановлений час зранку</value>
+  </data>
   <data name="ChangeLocation" xml:space="preserve">
     <value>🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎</value>
   </data>

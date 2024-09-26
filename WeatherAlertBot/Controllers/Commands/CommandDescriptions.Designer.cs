@@ -61,6 +61,15 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дозволяє відправляти погоду на встановлений час зранку.
+        /// </summary>
+        public static string AnableNotification {
+            get {
+                return ResourceManager.GetString("AnableNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎.
         /// </summary>
         public static string ChangeLocation {
