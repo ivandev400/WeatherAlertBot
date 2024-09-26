@@ -6,7 +6,13 @@ namespace WeatherAlertBot.Services
 {
     public class WeatherService
     {
-        public string UpdatedAPILink(UserSettings settings, string geocodingApiKey)
+        public string CurrentWeatherLink(UserSettings settings, string geocodingApiKey)
+        {
+            var geocodingResult = LocationToGeocidingResult(settings, geocodingApiKey);
+            string link = $"https://api.open-meteo.com/v1/forecast?latitude={geocodingResult.Result.Latitude}&longitude={geocodingResult.Result.Longitude}&current=temperature_2m,rain,wind_speed_10m&timezone=auto&forecast_days=1";
+            return link;
+        }
+        public string DalyWeatherLink(UserSettings settings, string geocodingApiKey)
         {
             var geocodingResult = LocationToGeocidingResult(settings, geocodingApiKey);
             string link = $"https://api.open-meteo.com/v1/forecast?latitude={geocodingResult.Result.Latitude}&longitude={geocodingResult.Result.Longitude}&current=temperature_2m,rain,wind_speed_10m&timezone=auto&forecast_days=1";
@@ -42,7 +48,7 @@ namespace WeatherAlertBot.Services
 
             using (HttpClient client = new HttpClient())
             {
-                string url = UpdatedAPILink(settings, geocodingApiKey);
+                string url = CurrentWeatherLink(settings, geocodingApiKey);
                 HttpResponseMessage response = await client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
