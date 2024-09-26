@@ -9,7 +9,9 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             return new ReplyKeyboardMarkup(new[]
             {
-                new KeyboardButton[] {"/changelocation", "/changemorningtime", "/currentweather"}
+                new KeyboardButton[] { "/changelocation" },
+                new KeyboardButton[] { "/changemorningtime" },
+                new KeyboardButton[] { "/currentweather" }
             })
             {
                 ResizeKeyboard = true,
@@ -21,7 +23,9 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             return new ReplyKeyboardMarkup(new[]
             {
-                new KeyboardButton[] {"/currentweather", "/settings", "/help"}
+                new KeyboardButton[] { "/currentweather" },
+                new KeyboardButton[] { "/settings" },
+                new KeyboardButton[] { "/help" }
             })
             {
                 ResizeKeyboard = true,
