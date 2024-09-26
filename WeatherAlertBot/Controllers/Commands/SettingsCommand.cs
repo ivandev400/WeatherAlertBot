@@ -31,7 +31,7 @@ namespace WeatherAlertBot.Controllers.Commands
 		{
 			return new ReplyKeyboardMarkup(new[]
 			{
-				new KeyboardButton[] {"Change Location(Змінити місце)", "Change Morning Time(змінити ранковий час)"}
+				new KeyboardButton[] {"/changelocation", "/changemorningtime", "/currentweather"}
 			})
 			{
 				ResizeKeyboard = true,
