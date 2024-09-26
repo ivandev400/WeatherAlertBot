@@ -29,9 +29,11 @@ builder.Services.AddTransient<ICommand, StartCommand>();
 builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
 builder.Services.AddTransient<ICommand, SettingsCommand>();
 builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
+builder.Services.AddTransient<ICommand, ChangeMorningTimeCommand>();
 builder.Services.AddTransient<ICommand, HelpCommand>();
 
 builder.Services.AddTransient<IListener, ChangeLocationCommand>();
+builder.Services.AddTransient<IListener, ChangeMorningTimeCommand>();
 
 builder.Services.AddTransient<CommandExecutor>();
 builder.Services.AddSingleton<UpdateDistributor<CommandExecutor>>();

@@ -70,6 +70,15 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. Set morning time to be aware of weather every day automatically. .
+        /// </summary>
+        public static string ChangeMorningTime {
+            get {
+                return ResourceManager.GetString("ChangeMorningTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🌞Надсилає погоду. (Return the weather).
         /// </summary>
         public static string CurrentWeather {

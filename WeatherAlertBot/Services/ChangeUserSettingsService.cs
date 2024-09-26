@@ -47,7 +47,7 @@ namespace WeatherAlertBot.Services
                 return;
             }
         }
-        public void ChangeUserSettingsLocation(User user, TimeOnly morningTime)
+        public void ChangeUserSettingsMorningTime(User user, TimeOnly morningTime)
         {
             try
             {

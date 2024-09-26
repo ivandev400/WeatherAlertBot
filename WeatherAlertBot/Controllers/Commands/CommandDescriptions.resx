@@ -120,6 +120,9 @@
   <data name="ChangeLocation" xml:space="preserve">
     <value>🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎</value>
   </data>
+  <data name="ChangeMorningTime" xml:space="preserve">
+    <value>🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. Set morning time to be aware of weather every day automatically. </value>
+  </data>
   <data name="CurrentWeather" xml:space="preserve">
     <value>🌞Надсилає погоду. (Return the weather)</value>
   </data>

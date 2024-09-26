@@ -18,6 +18,9 @@ namespace WeatherAlertBot.Controllers.Commands
                     case ChangeLocationCommand changeLocationCommand:
                         changeLocationCommand.Executor = this;
                         break;
+                    case ChangeMorningTimeCommand changeMorningTimeCommand:
+                        changeMorningTimeCommand.Executor = this;
+                        break;
                 }
             }
         }
