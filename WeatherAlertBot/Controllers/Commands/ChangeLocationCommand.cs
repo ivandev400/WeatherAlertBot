@@ -13,13 +13,15 @@ namespace WeatherAlertBot.Controllers.Commands
 
         public IChangeUserSettingsService changeSettings;
         public IGetUserService getUserService;
+        public IReplyKeyboard replyMarkup;
 
         public CommandExecutor Executor { get; set; }
 
-        public ChangeLocationCommand(IChangeUserSettingsService changeSettings, IGetUserService getUserService)
+        public ChangeLocationCommand(IChangeUserSettingsService changeSettings, IGetUserService getUserService, IReplyKeyboard replyMarkup)
         {
             this.changeSettings = changeSettings;
             this.getUserService = getUserService;
+            this.replyMarkup = replyMarkup;
         }
 
         public string? location = null;
@@ -55,7 +57,7 @@ namespace WeatherAlertBot.Controllers.Commands
             changeSettings.ChangeUserSettingsLocation(user, location);
             location = null;
 
-            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success");
+            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup());
             Executor.StopListen();
         }
     }

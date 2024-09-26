@@ -1,7 +1,6 @@
 ﻿using Telegram.Bot;
 using WeatherAlertBot.Models;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
 using WeatherAlertBot.Interfaces;
 
 namespace WeatherAlertBot.Controllers.Commands
@@ -13,10 +12,13 @@ namespace WeatherAlertBot.Controllers.Commands
 		public string CommandDescription => CommandDescriptions.Settings;
 
 		public IReturnSettingsService settingsService;
+		public IReplyKeyboard replyMarkup;
 
-		public SettingsCommand(IReturnSettingsService settingsService)
+
+        public SettingsCommand(IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
 		{
 			this.settingsService = settingsService;
+			this.replyMarkup = replyMarkup;
 		}
 
 		public async Task Execute(Update update)
@@ -24,19 +26,7 @@ namespace WeatherAlertBot.Controllers.Commands
 			long chatId = update.Message.Chat.Id;
             string result = settingsService.ReturnSettingsToString(update);
 
-			await Client.SendTextMessageAsync(chatId, result, replyMarkup: Keyboard());
-		}
-
-		private ReplyKeyboardMarkup Keyboard()
-		{
-			return new ReplyKeyboardMarkup(new[]
-			{
-				new KeyboardButton[] {"/changelocation", "/changemorningtime", "/currentweather"}
-			})
-			{
-				ResizeKeyboard = true,
-				OneTimeKeyboard = true
-			};
+			await Client.SendTextMessageAsync(chatId, result, replyMarkup: replyMarkup.GetOneTimeMarkup());
 		}
     }
 }

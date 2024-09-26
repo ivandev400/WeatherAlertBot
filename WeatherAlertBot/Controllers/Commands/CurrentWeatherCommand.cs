@@ -15,10 +15,12 @@ namespace WeatherAlertBot.Controllers.Commands
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
         public IReturnSettingsService settingsService;
+        public IReplyKeyboard replyMarkup;
 
-        public CurrentWeatherCommand(IReturnSettingsService settingsService)
+        public CurrentWeatherCommand(IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
         {
             this.settingsService = settingsService;
+            this.replyMarkup = replyMarkup;
         }
 
         public string? Recommendation = null; 
@@ -35,7 +37,7 @@ namespace WeatherAlertBot.Controllers.Commands
                              $"🍃   {weatherResult.WindSpeed} km/h\r\n\r\n" +
                              Recommendation;
 
-            await Client.SendTextMessageAsync(update.Message.Chat.Id, message);
+            await Client.SendTextMessageAsync(chatId, message, replyMarkup: replyMarkup.GetPermanentMarkup());
             Recommendation = null;
         }
         private string RainConverter(double rain)

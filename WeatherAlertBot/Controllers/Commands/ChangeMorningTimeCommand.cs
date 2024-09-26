@@ -13,13 +13,15 @@ namespace WeatherAlertBot.Controllers.Commands
 
         public IChangeUserSettingsService changeSettings;
         public IGetUserService getUserService;
+        public IReplyKeyboard replyMarkup;
 
         public CommandExecutor Executor { get; set; }
 
-        public ChangeMorningTimeCommand(IChangeUserSettingsService changeSettings, IGetUserService getUserService)
+        public ChangeMorningTimeCommand(IChangeUserSettingsService changeSettings, IGetUserService getUserService, IReplyKeyboard replyMarkup)
         {
             this.changeSettings = changeSettings;
             this.getUserService = getUserService;
+            this.replyMarkup = replyMarkup;
         }
 
         public TimeOnly MorningTime = new TimeOnly(8, 0, 0);
@@ -63,7 +65,7 @@ namespace WeatherAlertBot.Controllers.Commands
             changeSettings.ChangeUserSettingsMorningTime(user, MorningTime);
             MorningTime = new TimeOnly(8, 0, 0);
 
-            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success");
+            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup());
             Executor.StopListen();
         }
     }

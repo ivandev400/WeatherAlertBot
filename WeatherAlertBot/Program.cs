@@ -32,6 +32,8 @@ builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
 builder.Services.AddTransient<ICommand, ChangeMorningTimeCommand>();
 builder.Services.AddTransient<ICommand, HelpCommand>();
 
+builder.Services.AddTransient<IReplyKeyboard, ReplyKeyboard>();
+
 builder.Services.AddTransient<IListener, ChangeLocationCommand>();
 builder.Services.AddTransient<IListener, ChangeMorningTimeCommand>();
 
