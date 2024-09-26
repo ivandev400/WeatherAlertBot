@@ -1,8 +1,8 @@
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using WeatherAlertBot.Models;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using WeatherAlertBot.Interfaces;
-using WeatherAlertBot.Services;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -24,7 +24,19 @@ namespace WeatherAlertBot.Controllers.Commands
 			long chatId = update.Message.Chat.Id;
             string result = settingsService.ReturnSettingsToString(update);
 
-			await Client.SendTextMessageAsync(chatId, result);
+			await Client.SendTextMessageAsync(chatId, result, replyMarkup: Keyboard());
 		}
-	}
+
+		private ReplyKeyboardMarkup Keyboard()
+		{
+			return new ReplyKeyboardMarkup(new[]
+			{
+				new KeyboardButton[] {"Change Location(Змінити місце)", "Change Morning Time(змінити ранковий час)"}
+			})
+			{
+				ResizeKeyboard = true,
+				OneTimeKeyboard = true
+			};
+		}
+    }
 }
