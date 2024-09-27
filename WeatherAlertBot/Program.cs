@@ -16,14 +16,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-static IHostBuilder CreateHostBuilder(string[] args) =>
-       Host.CreateDefaultBuilder(args)
-           .ConfigureServices((hostContext, services) =>
-           {
-               services.AddHostedService<MorningNotificationService>(); 
-                                                                       
-           });
-
 builder.Services.AddDbContext<UserContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
@@ -32,6 +24,7 @@ builder.Services.AddScoped<IReturnSettingsService, ReturnSettingsService>();
 builder.Services.AddScoped<ICreateUserService, CreateUserService>();
 builder.Services.AddScoped<IChangeUserSettingsService, ChangeUserSettingsService>();
 builder.Services.AddScoped<IGetUserService, GetUserService>();
+builder.Services.AddScoped<IMorningNotificationService, MorningNotificationService>();
 
 builder.Services.AddTransient<ICommand, StartCommand>();
 builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
@@ -47,19 +40,23 @@ builder.Services.AddTransient<IReplyKeyboard, ReplyKeyboard>();
 builder.Services.AddTransient<IListener, ChangeLocationCommand>();
 builder.Services.AddTransient<IListener, ChangeMorningTimeCommand>();
 
+builder.Services.AddSingleton<IDailyNotifier, DailyNotifier>();
+
 builder.Services.AddTransient<CommandExecutor>();
 builder.Services.AddSingleton<UpdateDistributor<CommandExecutor>>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 
+
 builder.Logging.AddConsole();
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
 //}
 

@@ -1,65 +1,36 @@
-﻿using WeatherAlertBot.Controllers.Commands;
-using WeatherAlertBot.Db;
+﻿using Telegram.Bot.Types;
+using WeatherAlertBot.Controllers.Commands;
 using WeatherAlertBot.Interfaces;
-using Telegram.Bot.Types;
+using User = WeatherAlertBot.Models.User;
 
 namespace WeatherAlertBot.Services
 {
-    public class MorningNotificationService : BackgroundService
+    public class MorningNotificationService : IMorningNotificationService
     {
-        private readonly UserContext userContext;
         public CurrentWeatherCommand CurrentWeatherCommand;
         public DailyWeatherCommand DailyWeatherCommand;
 
-        public MorningNotificationService(UserContext userContext, IGetUserService getUserService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
+        public MorningNotificationService(IGetUserService getUserService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
         {
-            this.userContext = userContext;
             CurrentWeatherCommand = new CurrentWeatherCommand(settingsService, replyMarkup);
             DailyWeatherCommand = new DailyWeatherCommand(settingsService, replyMarkup, getUserService);
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        public async Task SendMorningNotification(User user)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            Update update = new Update
             {
-                await CheckAndSendMorningNotifications();
-                await Task.Delay(TimeSpan.FromSeconds(20), stoppingToken);
-            }
-        }
-
-        private async Task CheckAndSendMorningNotifications()
-        {
-            var users = userContext.Users.ToList();
-
-            foreach (var user in users)
-            {
-                var settings = userContext.UserSettings
-                    .FirstOrDefault(u => u.UserId == user.Id);
-
-                if (settings == null) continue;
-
-                TimeOnly morningTime = settings.MorningTime;
-                string updateInterval = settings.UpdateInterval;
-
-                if (updateInterval == "Yes")
+                Message = new Message
                 {
-                    TimeOnly.TryParse($"{DateTime.Now}", out TimeOnly currentTime);
-                    if (currentTime.Hour == morningTime.Hour && Math.Abs(currentTime.Minute - morningTime.Minute) <= 2)
+                    Chat = new Chat
                     {
-                        Update update = new Update
-                        {
-                            Message = new Message
-                            {
-                                Chat = new Chat
-                                {
-                                    Id = user.ChatId
-                                }
-                            }
-                        }; 
-                        await CurrentWeatherCommand.Execute(update);
+                        Id = user.ChatId
                     }
                 }
-            }
+            };
+
+            await CurrentWeatherCommand.Execute(update);
+            await DailyWeatherCommand.Execute(update);
         }
     }
 }

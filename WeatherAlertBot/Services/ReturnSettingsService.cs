@@ -2,7 +2,6 @@
 using WeatherAlertBot.Db;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
-using WeatherAlertBot.Services;
 
 public class ReturnSettingsService : IReturnSettingsService
 {
