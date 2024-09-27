@@ -1,10 +1,13 @@
-﻿using WeatherAlertBot.Db;
+﻿using Telegram.Bot;
+using WeatherAlertBot.Db;
 using WeatherAlertBot.Interfaces;
+using WeatherAlertBot.Models;
 
 namespace WeatherAlertBot.Services
 {
     public class DailyNotifier : IDailyNotifier
     {
+        private TelegramBotClient Client => Bot.GetTelegramBot();
         private readonly UserContext userContext;
         public IMorningNotificationService notificationService;
 
@@ -16,26 +19,27 @@ namespace WeatherAlertBot.Services
 
         public async Task SendDailyNotification()
         {
-            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-
-            TimeOnly startWindow = currentTime.AddMinutes(-1);
-            TimeOnly endWindow = currentTime.AddMinutes(1);
-
-            var settings = userContext.UserSettings
-                .Where(s => s.UpdateInterval == "Yes" &&
-                            s.MorningTime >= startWindow && s.MorningTime <= endWindow)
-                .ToList();
-
-            foreach (var setting in settings)
+            while (true)
             {
-                var user = userContext.Users
-                    .First(u => u.Id == setting.UserId);
+                TimeOnly currentTime = new TimeOnly(DateTime.Today.Hour, DateTime.Today.Minute);
 
-                if (user != null)
+                var settings = userContext.UserSettings
+                    .Where(s => s.UpdateInterval == "Yes" &&
+                                s.MorningTime.Hour == currentTime.Hour && s.MorningTime.Minute == currentTime.Minute)
+                    .ToList();
+
+                foreach (var setting in settings)
                 {
-                    await notificationService.SendMorningNotification(user);
-                    await Task.Delay(TimeSpan.FromMinutes(2));
+                    var user = userContext.Users
+                        .First(u => u.Id == setting.UserId);
+
+                    if (user != null)
+                    {
+                        await notificationService.SendMorningNotification(user);
+                        Thread.Sleep(60000);
+                    }
                 }
+                Thread.Sleep(5000);
             }
         }
     }

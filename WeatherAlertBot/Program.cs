@@ -47,7 +47,7 @@ builder.Services.AddSingleton<UpdateDistributor<CommandExecutor>>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-
+builder.Services.AddHostedService<NotificationBackgroundService>();
 
 builder.Logging.AddConsole();
 var app = builder.Build();

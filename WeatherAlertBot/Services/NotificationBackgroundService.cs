@@ -1,4 +1,6 @@
-﻿using WeatherAlertBot.Interfaces;
+﻿using Telegram.Bot;
+using WeatherAlertBot.Interfaces;
+using WeatherAlertBot.Models;
 using WeatherAlertBot.Services;
 
 public class NotificationBackgroundService : IHostedService, IDisposable
@@ -20,7 +22,7 @@ public class NotificationBackgroundService : IHostedService, IDisposable
 
     private void DoWork(object state)
     {
-        _dailyNotifier.SendDailyNotification();
+        Task.Run(() => _dailyNotifier.SendDailyNotification());
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
