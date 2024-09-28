@@ -28,11 +28,39 @@ namespace WeatherAlertBot.Controllers
             }
             switch (update.Message.Text)
             {
-                case "Змінити місце || Change Location":
+                case "Змінити місце":
+                    case "Change location":
                     update.Message.Text = "/changelocation";
                     break;
-                case "Змінити час ранкового сповіщення || Change notification morning time":
+
+                case "Змінити час ранкового сповіщення":
+                    case "Change notification morning time":
                     update.Message.Text = "/changemorningtime";
+                    break;
+
+                case "Current Weather":
+                    case "Поточна погода":
+                    update.Message.Text = "/currentweather";
+                    break;
+
+                case "Anable Morning Notifications":
+                    case "Дозволити Ранкові Сповіщення":
+                    update.Message.Text = "/anablenotification";
+                    break;
+
+                case "Settings":
+                    case "Налаштування":
+                    update.Message.Text = "/settings";
+                    break;
+
+                case "Language":
+                    case "Мова":
+                    update.Message.Text = "/language";
+                    break;
+
+                case "Help":
+                    case "Допомогти":
+                    update.Message.Text = "/help";
                     break;
             }
 
