@@ -26,6 +26,16 @@ namespace WeatherAlertBot.Controllers
             {
                 return;
             }
+            switch (update.Message.Text)
+            {
+                case "Змінити місце || Change Location":
+                    update.Message.Text = "/changelocation";
+                    break;
+                case "Змінити час ранкового сповіщення || Change notification morning time":
+                    update.Message.Text = "/changemorningtime";
+                    break;
+            }
+
             await updateDistributor.GetUpdate(update);
         }
 

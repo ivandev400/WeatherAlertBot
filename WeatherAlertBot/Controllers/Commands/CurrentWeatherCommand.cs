@@ -3,6 +3,7 @@ using Telegram.Bot;
 using WeatherAlertBot.Models;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Services;
+using Supabase.Gotrue;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -35,9 +36,9 @@ namespace WeatherAlertBot.Controllers.Commands
                              $"🌡️   {weatherResult.Temperature}°C   {TemeperatureConverter(weatherResult.Temperature)}\n" +
                              $"🌩️   {weatherResult.Rain}   {RainConverter(weatherResult.Rain)}\n" +
                              $"🍃   {weatherResult.WindSpeed} km/h\r\n\r\n" +
-                             Recommendation;
+            Recommendation;
 
-            await Client.SendTextMessageAsync(chatId, message, replyMarkup: replyMarkup.GetPermanentMarkup());
+            await Client.SendTextMessageAsync(chatId, message, replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
             Recommendation = null;
         }
         private string RainConverter(double rain)

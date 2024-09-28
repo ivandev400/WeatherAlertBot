@@ -57,7 +57,7 @@ namespace WeatherAlertBot.Controllers.Commands
             changeSettings.ChangeUserSettingsLocation(user, location);
             location = null;
 
-            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup());
+            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
             Executor.StopListen();
         }
     }

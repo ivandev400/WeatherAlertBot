@@ -65,7 +65,7 @@ namespace WeatherAlertBot.Controllers.Commands
             changeSettings.ChangeUserSettingsMorningTime(user, MorningTime);
             MorningTime = new TimeOnly(8, 0);
 
-            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup());
+            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
             Executor.StopListen();
         }
     }

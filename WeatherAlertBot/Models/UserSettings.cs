@@ -10,6 +10,7 @@ namespace WeatherAlertBot.Models
         public string Location { get; set; }
         public string UpdateInterval { get; set; }
         public TimeOnly MorningTime { get; set; }
+        public string Language = "ua";
         public string TimeZone { get; set; }
 
         public User User { get; set; }

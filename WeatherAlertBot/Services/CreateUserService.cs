@@ -26,13 +26,15 @@ namespace WeatherAlertBot.Services
                     Location = "Kyiv",
                     UpdateInterval = "",
                     MorningTime = new TimeOnly(8, 0),
-                    TimeZone = "Europe/Kiev"
+                    TimeZone = "Europe/Kiev",
+                    Language = "ua"
                 };
 
                 var newUser = new Models.User
                 {
                     ChatId = update.Message.Chat.Id,
-                    UserSettings = newUserSettings
+                    UserSettings = newUserSettings,
+                    Language = newUserSettings.Language
                 };
                 userContext.Users.Add(newUser);
                 userContext.SaveChanges();

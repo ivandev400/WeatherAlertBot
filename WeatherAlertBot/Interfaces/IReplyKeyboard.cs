@@ -4,8 +4,8 @@ namespace WeatherAlertBot.Interfaces
 {
     public interface IReplyKeyboard
     {
-        public ReplyKeyboardMarkup GetOneTimeMarkup();
-        public ReplyKeyboardMarkup GetPermanentMarkup();
+        public ReplyKeyboardMarkup GetOneTimeMarkup(string language);
+        public ReplyKeyboardMarkup GetPermanentMarkup(string language);
         public ReplyKeyboardMarkup GetBoolMarkup();
     }
 }

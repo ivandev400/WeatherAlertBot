@@ -5,13 +5,19 @@ namespace WeatherAlertBot.Controllers.Commands
 {
     public class ReplyKeyboard : IReplyKeyboard
     {
-        public ReplyKeyboardMarkup GetOneTimeMarkup()
+        public ReplyKeyboardMarkup GetOneTimeMarkup(string language)
         {
+            string changeLocationText = language == "en" ? "Change Location" : "Змінити місце";
+            string changeMorningTimeText = language == "en" ? "Change notification morning time" : "Змінити час ранкового сповіщення";
+            string currentWeatherText = language == "en" ? "Current Weather" : "Поточна погода";
+            string anableMorningNotificationText = language == "en" ? "Anable Morning Notifications" : "Дозволити Ранкові Сповіщення";
+
             return new ReplyKeyboardMarkup(new[]
             {
-                new KeyboardButton[] { "/changelocation" },
-                new KeyboardButton[] { "/changemorningtime" },
-                new KeyboardButton[] { "/currentweather" }
+                new KeyboardButton[] { changeLocationText },
+                new KeyboardButton[] { changeMorningTimeText },
+                new KeyboardButton[] { anableMorningNotificationText },
+                new KeyboardButton[] { currentWeatherText }
             })
             {
                 ResizeKeyboard = true,
@@ -19,13 +25,19 @@ namespace WeatherAlertBot.Controllers.Commands
             };
         }
 
-        public ReplyKeyboardMarkup GetPermanentMarkup()
+        public ReplyKeyboardMarkup GetPermanentMarkup(string language)
         {
+            string currentWeatherText = language == "en" ? "Current Weather" : "Поточна погода";
+            string settingsText = language == "en" ? "Settings" : "Налаштування";
+            string setLanguageText = language == "en" ? "Language" : "Мова";
+            string helpText = language == "en" ? "Help" : "Допомогти";
+
             return new ReplyKeyboardMarkup(new[]
             {
-                new KeyboardButton[] { "/currentweather" },
-                new KeyboardButton[] { "/settings" },
-                new KeyboardButton[] { "/help" }
+                new KeyboardButton[] { currentWeatherText },
+                new KeyboardButton[] { settingsText },
+                new KeyboardButton[] { setLanguageText },
+                new KeyboardButton[] { helpText }
             })
             {
                 ResizeKeyboard = true,

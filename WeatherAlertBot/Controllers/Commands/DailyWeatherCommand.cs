@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using Supabase.Gotrue;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
@@ -33,7 +34,7 @@ namespace WeatherAlertBot.Controllers.Commands
             var userSettings = settingsService.ReturnSettings(update);
             var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
-            await Client.SendTextMessageAsync(chatId, "This is daily predication", replyMarkup: replyMarkup.GetPermanentMarkup());
+            await Client.SendTextMessageAsync(chatId, "This is daily predication", replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
             Recommendation = null;
         }
     }
