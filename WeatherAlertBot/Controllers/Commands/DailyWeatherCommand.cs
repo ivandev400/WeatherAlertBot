@@ -34,7 +34,7 @@ namespace WeatherAlertBot.Controllers.Commands
             var userSettings = settingsService.ReturnSettings(update);
             var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
-            await Client.SendTextMessageAsync(chatId, "This is daily predication", replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
+            await Client.SendTextMessageAsync(chatId, "This is daily predication", replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
             Recommendation = null;
         }
     }

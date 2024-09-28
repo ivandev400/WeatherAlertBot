@@ -7,5 +7,6 @@ namespace WeatherAlertBot.Interfaces
         public ReplyKeyboardMarkup GetOneTimeMarkup(string language);
         public ReplyKeyboardMarkup GetPermanentMarkup(string language);
         public ReplyKeyboardMarkup GetBoolMarkup();
+        public ReplyKeyboardMarkup GetLanguageMarkup();
     }
 }

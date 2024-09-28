@@ -38,7 +38,7 @@ namespace WeatherAlertBot.Controllers.Commands
                              $"🍃   {weatherResult.WindSpeed} km/h\r\n\r\n" +
             Recommendation;
 
-            await Client.SendTextMessageAsync(chatId, message, replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
+            await Client.SendTextMessageAsync(chatId, message, replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
             Recommendation = null;
         }
         private string RainConverter(double rain)

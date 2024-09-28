@@ -52,13 +52,13 @@ namespace WeatherAlertBot.Controllers.Commands
             {
                 changeSettings.ChangeUserSettingsUpdateInterval(user, "Yes");
 
-                await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
+                await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
                 Executor.StopListen();
                 return;
             }
             changeSettings.ChangeUserSettingsUpdateInterval(user, "No");
 
-            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
+            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
             Executor.StopListen();
             return;
         }

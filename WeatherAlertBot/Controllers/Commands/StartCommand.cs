@@ -2,34 +2,53 @@
 using WeatherAlertBot.Models;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
+using Supabase.Gotrue;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
-    public class StartCommand : ICommand
+    public class StartCommand : ICommand, IListener
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/start";
         public string CommandDescription => CommandDescriptions.StartCommand;
+        public LanguageCommand LanguageCommand;
+        public CommandExecutor Executor { get; set; }
+
         public ICreateUserService createUserService;
         public IReplyKeyboard replyMarkup;
         public IGetUserService getUserService;
 
-        public StartCommand(ICreateUserService createUserService, IReplyKeyboard replyMarkup, IGetUserService getUserService)
+        public StartCommand(ICreateUserService createUserService, IReplyKeyboard replyMarkup, IGetUserService getUserService, IChangeUserSettingsService changeSettingsService)
         {
             this.createUserService = createUserService;
             this.replyMarkup = replyMarkup;
             this.getUserService = getUserService;
+            LanguageCommand = new LanguageCommand(replyMarkup, getUserService, changeSettingsService);
         }
 
         public async Task Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
             createUserService.CreateUser(update);
-            string textMessage = "This is Weather Alert Bot(or storm watch).This Bot was created to help you to know weather at time. Here you can use different commands shown below - immidiately send you message with weather info in location that you can see and set using command /settings (default location is Kyiv).\r\n\r\nЦе Weather Alert Bot (або Storm Watch). Цей бот був створений, щоб допомогти вам дізнатися погоду в даний момент у будь-якій точці світу та інші плюшки. Тут ви можете використовувати різні команди показані нижче.Бот може негайно надіслати вам повідомлення з інформацією про погоду в будь-якій точці світу, яке ви можете переглянути та вказати за допомогою команди /settings (за замовчуванням - Київ).";
 
+            LanguageCommand.Executor = Executor;
+
+            Executor.StartListen(this);
+            await LanguageCommand.Execute(update);
+        }
+
+        public async Task GetUpdate(Update update)
+        {
+            long chatId = update.Message.Chat.Id;
             var user = getUserService.GetUser(update);
-            
-            await Client.SendTextMessageAsync(chatId, textMessage, replyMarkup: replyMarkup.GetPermanentMarkup("ua"));
+
+            await LanguageCommand.GetUpdate(update);
+
+            string textMessage = user.Language == "en" ? "This is Weather Alert Bot(or storm watch).This Bot was created to help you to know weather at time. Here you can use different commands shown below - immidiately send you message with weather info in location that you can see and set using command /settings (default location is Kyiv)." : "Це Weather Alert Bot (або Storm Watch). Цей бот був створений, щоб допомогти вам дізнатися погоду в даний момент у будь-якій точці світу та інші плюшки. Тут ви можете використовувати різні команди показані нижче.Бот може негайно надіслати вам повідомлення з інформацією про погоду в будь-якій точці світу, яке ви можете переглянути та вказати за допомогою команди /settings (за замовчуванням - Київ).";
+
+            await Client.SendTextMessageAsync(chatId, textMessage, replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
+
+            Executor.StopListen();
         }
     }
 }

@@ -69,5 +69,23 @@ namespace WeatherAlertBot.Services
                 return; 
             }
         }
+
+        public void ChangeLanguage(User user, string language)
+        {
+            try
+            {
+                if (userExistsService.UserExistsByUser(user))
+                {
+                    var settings = userContext.UserSettings.First(u => u.UserId == user.Id);
+                    settings.Language = language;
+                    user.Language = language;
+                    userContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
     }
 }

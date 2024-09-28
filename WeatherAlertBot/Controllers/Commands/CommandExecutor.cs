@@ -25,7 +25,10 @@ namespace WeatherAlertBot.Controllers.Commands
                         anableNotificationCommand.Executor = this;
                         break;
                     case LanguageCommand languageCommand:
-                        languageCommand.Executor(this);
+                        languageCommand.Executor = this;
+                        break;
+                    case StartCommand startCommand:
+                        startCommand.Executor = this;
                         break;
                 }
             }

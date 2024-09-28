@@ -57,5 +57,18 @@ namespace WeatherAlertBot.Controllers.Commands
                 OneTimeKeyboard = false
             };
         }
+
+        public ReplyKeyboardMarkup GetLanguageMarkup()
+        {
+            return new ReplyKeyboardMarkup(new[]
+            {
+                new KeyboardButton[] { "🇬🇧EN🇬🇧" },
+                new KeyboardButton[] { "🇺🇦UA🇺🇦" },
+            })
+            {
+                ResizeKeyboard = true,
+                OneTimeKeyboard = false
+            };
+        }
     }
 }

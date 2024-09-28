@@ -106,6 +106,15 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Встановлює мову. Set the language.
+        /// </summary>
+        public static string LanguageCommand {
+            get {
+                return ResourceManager.GetString("LanguageCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ⚙️Показує ваші налаштування. (Show your settings).
         /// </summary>
         public static string Settings {

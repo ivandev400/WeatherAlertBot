@@ -28,7 +28,7 @@ namespace WeatherAlertBot.Controllers.Commands
 
 			var settings = settingsService.ReturnSettings(update);
 
-			await Client.SendTextMessageAsync(chatId, stringSettings, replyMarkup: replyMarkup.GetOneTimeMarkup("ua"));
+			await Client.SendTextMessageAsync(chatId, stringSettings, replyMarkup: replyMarkup.GetOneTimeMarkup(settings.Language));
 		}
     }
 }
