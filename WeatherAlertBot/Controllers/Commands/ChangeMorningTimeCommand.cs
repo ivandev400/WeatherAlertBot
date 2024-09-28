@@ -24,7 +24,7 @@ namespace WeatherAlertBot.Controllers.Commands
             this.replyMarkup = replyMarkup;
         }
 
-        public TimeOnly MorningTime = new TimeOnly(8, 0, 0);
+        public TimeOnly MorningTime = new TimeOnly(8, 0);
 
         public async Task Execute(Update update)
         {
@@ -50,7 +50,7 @@ namespace WeatherAlertBot.Controllers.Commands
                 return;
             }
 
-            if (MorningTime == new TimeOnly(8, 0, 0))
+            if (MorningTime == new TimeOnly(8, 0))
             {
                 if (TimeOnly.TryParse(update.Message.Text, out TimeOnly parsedTime))
                 {
@@ -63,7 +63,7 @@ namespace WeatherAlertBot.Controllers.Commands
                 }
             }
             changeSettings.ChangeUserSettingsMorningTime(user, MorningTime);
-            MorningTime = new TimeOnly(8, 0, 0);
+            MorningTime = new TimeOnly(8, 0);
 
             await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup());
             Executor.StopListen();

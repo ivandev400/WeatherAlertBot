@@ -18,7 +18,7 @@ namespace WeatherAlertBot.Services
             string link = $"https://api.open-meteo.com/v1/forecast?latitude={geocodingResult.Result.Latitude}&longitude={geocodingResult.Result.Longitude}&current=temperature_2m,rain,wind_speed_10m&timezone=auto&forecast_days=1";
             return link;
         }
-        private async Task<GeocodingResult> LocationToGeocidingResult(UserSettings settings, string geocodingApiKey)
+        public async Task<GeocodingResult> LocationToGeocidingResult(UserSettings settings, string geocodingApiKey)
         {
             var address = settings.Location;
             var geocodingResult = new GeocodingResult();
@@ -59,6 +59,7 @@ namespace WeatherAlertBot.Services
                     if (currentWeather != null)
                     {
                         weatherResult = currentWeather.Current;
+                        weatherResult.TimeZone = currentWeather.TimeZone;
                     }
                 }
                 return weatherResult;

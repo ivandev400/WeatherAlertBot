@@ -15,5 +15,7 @@ namespace WeatherAlertBot.Models
 
         [JsonProperty("wind_speed_10m")]
         public double WindSpeed { get; set; }
+
+        public string TimeZone { get; set; }
     }
 }

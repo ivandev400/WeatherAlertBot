@@ -25,7 +25,8 @@ namespace WeatherAlertBot.Services
                 {
                     Location = "Kyiv",
                     UpdateInterval = "",
-                    MorningTime = new TimeOnly(8, 0, 0)
+                    MorningTime = new TimeOnly(8, 0),
+                    TimeZone = "Europe/Kiev"
                 };
 
                 var newUser = new Models.User

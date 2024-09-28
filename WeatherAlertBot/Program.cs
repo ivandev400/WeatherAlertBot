@@ -4,20 +4,25 @@ using WeatherAlertBot.Db;
 using WeatherAlertBot.Services;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Controllers;
+using Microsoft.Extensions.DependencyInjection;
+using Quartz;
+using Quartz.Impl;
+using WeatherAlertBot.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 builder.Services.AddDbContext<UserContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserExistsService, UserExistsService>();
 builder.Services.AddScoped<IReturnSettingsService, ReturnSettingsService>();
@@ -40,16 +45,28 @@ builder.Services.AddTransient<IReplyKeyboard, ReplyKeyboard>();
 builder.Services.AddTransient<IListener, ChangeLocationCommand>();
 builder.Services.AddTransient<IListener, ChangeMorningTimeCommand>();
 
-builder.Services.AddSingleton<IDailyNotifier, DailyNotifier>();
-
 builder.Services.AddTransient<CommandExecutor>();
 builder.Services.AddSingleton<UpdateDistributor<CommandExecutor>>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-builder.Services.AddHostedService<NotificationBackgroundService>();
-
 builder.Logging.AddConsole();
+
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    var jobKey = new JobKey("dailyJob_User");
+    q.AddJob<NotificationJob>(opts => opts.WithIdentity(jobKey));
+    q.AddTrigger(opts => opts
+    .ForJob(jobKey)
+        .WithIdentity("dailyTrigger")
+        .WithCronSchedule("0 * * * * ?")
+    );
+});
+
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
 var app = builder.Build();
 
 

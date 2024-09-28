@@ -7,6 +7,8 @@ namespace WeatherAlertBot.Services
     public class ChangeUserSettingsService : IChangeUserSettingsService
     {
         private IUserExistsService userExistsService;
+        private WeatherService weatherService => new WeatherService();
+        private string geocodingApiKey => Bot.GeocodingApiKey;
         private UserContext userContext;
 
         public ChangeUserSettingsService(IUserExistsService userExistsService, UserContext userContext)
@@ -22,7 +24,11 @@ namespace WeatherAlertBot.Services
                 if (userExistsService.UserExistsByUser(user))
                 {
                     var settings = userContext.UserSettings.First(u => u.UserId == user.Id);
+
                     settings.Location = location;
+
+                    var weatherResult = weatherService.GetWeatherDataStringResponse(settings, geocodingApiKey);
+                    settings.TimeZone = weatherResult.Result.TimeZone.ToString();
                     userContext.SaveChanges();
                 }
             }
