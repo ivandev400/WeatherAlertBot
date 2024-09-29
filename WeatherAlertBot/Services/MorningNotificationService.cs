@@ -12,7 +12,7 @@ namespace WeatherAlertBot.Services
 
         public MorningNotificationService(IGetUserService getUserService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
         {
-            CurrentWeatherCommand = new CurrentWeatherCommand(settingsService, replyMarkup);
+            CurrentWeatherCommand = new CurrentWeatherCommand(settingsService, replyMarkup, getUserService);
             DailyWeatherCommand = new DailyWeatherCommand(settingsService, replyMarkup, getUserService);
         }
 

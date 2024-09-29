@@ -2,6 +2,7 @@
 using WeatherAlertBot.Models;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
+using Telegram.Bot.Types.Enums;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -28,7 +29,7 @@ namespace WeatherAlertBot.Controllers.Commands
 
 			var settings = settingsService.ReturnSettings(update);
 
-			await Client.SendTextMessageAsync(chatId, stringSettings, replyMarkup: replyMarkup.GetOneTimeMarkup(settings.Language));
+			await Client.SendTextMessageAsync(chatId, stringSettings, null, ParseMode.Html, replyMarkup: replyMarkup.GetOneTimeMarkup(settings.Language));
 		}
     }
 }

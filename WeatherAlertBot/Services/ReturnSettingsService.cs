@@ -28,13 +28,13 @@ public class ReturnSettingsService : IReturnSettingsService
                 .Where(x => x.UserId == user.Id)
                 .First();
 
-            string result = user.Language == "en" ? $"Location:  📍{settings.Location} \n" +
-                $"Notification: 🔔{settings.UpdateInterval} \n" +
-                $"Morning time:  🌅{settings.MorningTime}"
+            string result = user.Language == "en" ? $"📍Location: <b>{settings.Location}</b> \n" +
+                $"🔔Notification: <b>{settings.UpdateInterval}</b> \n" +
+                $"🌅Morning time: <b>{settings.MorningTime}</b>"
                 :
-                $"Місце:  📍{settings.Location} \n" +
-                $"Сповіщення:  🔔{settings.UpdateInterval} \n" +
-                $"Ранковий час:  🌅{settings.MorningTime}";
+                $"📍Місце: <b>{settings.Location}</b> \n" +
+                $"🔔Сповіщення: <b>{settings.UpdateInterval}</b> \n" +
+                $"🌅Ранковий час: <b>{settings.MorningTime}</b>";
 
             return result;
         }

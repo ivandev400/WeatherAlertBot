@@ -22,7 +22,7 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             long chatId = update.Message.Chat.Id;
 
-            string textMessage = "Список комманд (list of commands): \r\n\r\n" +
+            string textMessage = "📜 Список команд (List of Commands): \r\n\r\n" +
                 $"{this.CommandName} - {this.CommandDescription} \r\n\r\n";
 
             var commands = _serviceProvider.GetServices<ICommand>();

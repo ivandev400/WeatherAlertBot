@@ -61,7 +61,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дозволяє відправляти погоду на встановлений час зранку.
+        ///   Looks up a localized string similar to 🔔 Активує ранкові сповіщення про погоду (Enables morning weather notifications).
         /// </summary>
         public static string AnableNotification {
             get {
@@ -70,7 +70,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎.
+        ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити. (Changes the location from where you want know the weather) 🌎.
         /// </summary>
         public static string ChangeLocation {
             get {
@@ -79,7 +79,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. Set morning time to be aware of weather every day automatically. .
+        ///   Looks up a localized string similar to 🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. (Changesmorning time to be aware of weather every day automatically).
         /// </summary>
         public static string ChangeMorningTime {
             get {
@@ -88,7 +88,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🌞Надсилає погоду. (Return the weather).
+        ///   Looks up a localized string similar to 🌞Надсилає поточну погоду. (Sends the current weather).
         /// </summary>
         public static string CurrentWeather {
             get {
@@ -97,7 +97,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🙈Дає опис всіх доступних команд. (Show all awailable commands).
+        ///   Looks up a localized string similar to 🙈Дає опис всіх доступних команд. (Shows all awailable commands).
         /// </summary>
         public static string HelpCommand {
             get {
@@ -106,7 +106,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Встановлює мову. Set the language.
+        ///   Looks up a localized string similar to 🗣️Встановлює мову. (Sets the language).
         /// </summary>
         public static string LanguageCommand {
             get {
@@ -115,7 +115,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ⚙️Показує ваші налаштування. (Show your settings).
+        ///   Looks up a localized string similar to ⚙️Показує ваші налаштування. (Shows your settings).
         /// </summary>
         public static string Settings {
             get {
@@ -124,7 +124,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🚀Запускає бота. (Lauching the bot).
+        ///   Looks up a localized string similar to 🚀Запускає бота. (Starts the bot).
         /// </summary>
         public static string StartCommand {
             get {

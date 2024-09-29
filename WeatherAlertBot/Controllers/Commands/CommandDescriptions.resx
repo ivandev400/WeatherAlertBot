@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangeLocation" xml:space="preserve">
-    <value>🌍 Змінює місто, погоду якого ви хочете відстежити. (Set the location from where you want know the weather) 🌎</value>
+    <value>🌍 Змінює місто, погоду якого ви хочете відстежити. (Changes the location from where you want know the weather) 🌎</value>
   </data>
   <data name="ChangeMorningTime" xml:space="preserve">
-    <value>🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. Set morning time to be aware of weather every day automatically. </value>
+    <value>🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. (Changesmorning time to be aware of weather every day automatically)</value>
   </data>
   <data name="CurrentWeather" xml:space="preserve">
-    <value>🌞Надсилає погоду. (Return the weather)</value>
+    <value>🌞Надсилає поточну погоду. (Sends the current weather)</value>
   </data>
   <data name="HelpCommand" xml:space="preserve">
-    <value>🙈Дає опис всіх доступних команд. (Show all awailable commands)</value>
+    <value>🙈Дає опис всіх доступних команд. (Shows all awailable commands)</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>⚙️Показує ваші налаштування. (Show your settings)</value>
+    <value>⚙️Показує ваші налаштування. (Shows your settings)</value>
   </data>
   <data name="StartCommand" xml:space="preserve">
-    <value>🚀Запускає бота. (Lauching the bot)</value>
+    <value>🚀Запускає бота. (Starts the bot)</value>
   </data>
   <data name="AnableNotification" xml:space="preserve">
-    <value>Дозволяє відправляти погоду на встановлений час зранку</value>
+    <value>🔔 Активує ранкові сповіщення про погоду (Enables morning weather notifications)</value>
   </data>
   <data name="LanguageCommand" xml:space="preserve">
-    <value>Встановлює мову. Set the language</value>
+    <value>🗣️Встановлює мову. (Sets the language)</value>
   </data>
 </root>
