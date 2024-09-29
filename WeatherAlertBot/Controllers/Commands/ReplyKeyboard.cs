@@ -45,12 +45,15 @@ namespace WeatherAlertBot.Controllers.Commands
             };
         }
 
-        public ReplyKeyboardMarkup GetBoolMarkup()
+        public ReplyKeyboardMarkup GetBoolMarkup(string language)
         {
+            string yesText = language == "en" ? "YES" : "ТАК";
+            string noText = language == "en" ? "NO" : "НІ";
+
             return new ReplyKeyboardMarkup(new[]
             {
-                new KeyboardButton[] { "YES" },
-                new KeyboardButton[] { "NO" },
+                new KeyboardButton[] { yesText },
+                new KeyboardButton[] { noText },
             })
             {
                 ResizeKeyboard = true,

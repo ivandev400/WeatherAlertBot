@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using Supabase.Gotrue;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
@@ -29,14 +30,17 @@ namespace WeatherAlertBot.Controllers.Commands
         public async Task Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
+            var user = getUserService.GetUser(update);
+            var text = user.Language == "en" ? "🌆 Set the time (8:00 for example)" : "🌆 Введіть час (8:00 наприклад)";
             Executor.StartListen(this);
 
-            await Client.SendTextMessageAsync(chatId, "🌆 Введіть час (8:00 приклад).Set the time (8:00 example)");
+            await Client.SendTextMessageAsync(chatId, text);
         }
         public async Task GetUpdate(Update update)
         {
             long chatId = update.Message.Chat.Id;
             var user = getUserService.GetUser(update);
+            var text = user.Language == "en" ? "✅ Success" : "✅ Операція успішна";
 
             if (update.Message.Text == null)
             {
@@ -45,7 +49,8 @@ namespace WeatherAlertBot.Controllers.Commands
 
             if (user == null)
             {
-                await Client.SendTextMessageAsync(chatId, "☢️ Вас нема в базі даних, спробуйте команду /start. Error, try start command.");
+                var warning = user.Language == "en" ? "☢️ Error, try start command" : "☢️ Вас нема в базі даних, спробуйте команду /start";
+                await Client.SendTextMessageAsync(chatId, warning);
                 Executor.StopListen();
                 return;
             }
@@ -58,14 +63,15 @@ namespace WeatherAlertBot.Controllers.Commands
                 }
                 else
                 {
-                    await Client.SendTextMessageAsync(chatId, "Не вірний формат, спробуйте ще раз. Invalid format, try one more time.");
+                    var warning = user.Language == "en" ? "Invalid format, try one more time." : "Не вірний формат, спробуйте ще раз.";
+                    await Client.SendTextMessageAsync(chatId, warning);
                     return;
                 }
             }
             changeSettings.ChangeUserSettingsMorningTime(user, MorningTime);
             MorningTime = new TimeOnly(8, 0);
 
-            await Client.SendTextMessageAsync(chatId, "✅ Операція успішна. Success", replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
+            await Client.SendTextMessageAsync(chatId, text, replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
             Executor.StopListen();
         }
     }

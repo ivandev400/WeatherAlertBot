@@ -44,7 +44,8 @@ namespace WeatherAlertBot.Controllers.Commands
 
             if (user == null)
             {
-                await Client.SendTextMessageAsync(chatId, "☢️ Вас нема в базі даних, спробуйте команду /start. Error, try start command.");
+                var warning = user.Language == "en" ? "☢️ Error, try start command" : "☢️ Вас нема в базі даних, спробуйте команду /start";
+                await Client.SendTextMessageAsync(chatId, warning);
                 Executor.StopListen();
                 return;
             }
