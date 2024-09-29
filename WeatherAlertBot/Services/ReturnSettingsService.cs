@@ -28,9 +28,14 @@ public class ReturnSettingsService : IReturnSettingsService
                 .Where(x => x.UserId == user.Id)
                 .First();
 
-            string result = $"Location: {settings.Location} \n" +
-                $"Notification: {settings.UpdateInterval} \n" +
-                $"Morning time: {settings.MorningTime}";
+            string result = user.Language == "en" ? $"Location:  📍{settings.Location} \n" +
+                $"Notification: 🔔{settings.UpdateInterval} \n" +
+                $"Morning time:  🌅{settings.MorningTime}"
+                :
+                $"Місце:  📍{settings.Location} \n" +
+                $"Сповіщення:  🔔{settings.UpdateInterval} \n" +
+                $"Ранковий час:  🌅{settings.MorningTime}";
+
             return result;
         }
         return "can't return settings";

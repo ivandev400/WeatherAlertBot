@@ -27,10 +27,11 @@ namespace WeatherAlertBot.Controllers.Commands
         public async Task Execute(Update update)
         {
             long chatId = update.Message.Chat.Id;
-
+            var user = getUserService.GetUser(update);
+            var text = user.Language == "en" ? "Choose language" : "Виберіть мову";
             Executor.StartListen(this);
 
-            await Client.SendTextMessageAsync(chatId, "Виберіть мову. Choose language.", replyMarkup: replyMarkup.GetLanguageMarkup());
+            await Client.SendTextMessageAsync(chatId, text, replyMarkup: replyMarkup.GetLanguageMarkup());
         }
         public async Task GetUpdate(Update update)
         {

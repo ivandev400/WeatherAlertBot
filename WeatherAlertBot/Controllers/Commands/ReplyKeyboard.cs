@@ -9,7 +9,7 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             string changeLocationText = language == "en" ? "Change Location" : "Змінити місце";
             string changeMorningTimeText = language == "en" ? "Change notification morning time" : "Змінити час ранкового сповіщення";
-            string currentWeatherText = language == "en" ? "Current Weather" : "Поточна погода";
+            string backText = language == "en" ? "Back" : "Назад";
             string anableMorningNotificationText = language == "en" ? "Anable Morning Notifications" : "Дозволити Ранкові Сповіщення";
 
             return new ReplyKeyboardMarkup(new[]
@@ -17,7 +17,7 @@ namespace WeatherAlertBot.Controllers.Commands
                 new KeyboardButton[] { changeLocationText },
                 new KeyboardButton[] { changeMorningTimeText },
                 new KeyboardButton[] { anableMorningNotificationText },
-                new KeyboardButton[] { currentWeatherText }
+                new KeyboardButton[] { backText }
             })
             {
                 ResizeKeyboard = true,

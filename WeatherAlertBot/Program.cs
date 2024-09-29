@@ -39,6 +39,7 @@ builder.Services.AddTransient<ICommand, ChangeMorningTimeCommand>();
 builder.Services.AddTransient<ICommand, DailyWeatherCommand>();
 builder.Services.AddTransient<ICommand, AnableNotificationCommand>();
 builder.Services.AddTransient<ICommand, LanguageCommand>();
+builder.Services.AddTransient<ICommand, BackCommand>();
 builder.Services.AddTransient<ICommand, HelpCommand>();
 
 builder.Services.AddTransient<IReplyKeyboard, ReplyKeyboard>();

@@ -28,7 +28,7 @@ namespace WeatherAlertBot.Controllers.Commands
             var commands = _serviceProvider.GetServices<ICommand>();
             foreach (var command in commands)
             {
-                if (command.CommandName != "/help" && command.CommandName != "/dailyweather")
+                if (command.CommandName != "/help" && command.CommandName != "/dailyweather" && command.CommandName != "/back")
                 {
                     textMessage += $"{command.CommandName} - {command.CommandDescription}\r\n\r\n";
                 }

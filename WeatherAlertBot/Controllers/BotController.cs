@@ -62,6 +62,11 @@ namespace WeatherAlertBot.Controllers
                     case "Допомогти":
                     update.Message.Text = "/help";
                     break;
+
+                case "Back":
+                    case "Назад":
+                    update.Message.Text = "/back";
+                    break;
             }
 
             await updateDistributor.GetUpdate(update);
