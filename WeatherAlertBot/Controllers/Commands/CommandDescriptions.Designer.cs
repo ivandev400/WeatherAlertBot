@@ -61,74 +61,83 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🔔 Активує ранкові сповіщення про погоду (Enables morning weather notifications).
+        ///   Looks up a localized string similar to Enables morning weather notifications.
         /// </summary>
-        public static string AnableNotification {
+        public static string AnableNotificationEN {
             get {
-                return ResourceManager.GetString("AnableNotification", resourceCulture);
+                return ResourceManager.GetString("AnableNotificationEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔔 Активує ранкові сповіщення про погоду.
+        /// </summary>
+        public static string AnableNotificationUA {
+            get {
+                return ResourceManager.GetString("AnableNotificationUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити. (Changes the location from where you want know the weather) 🌎.
         /// </summary>
-        public static string ChangeLocation {
+        public static string ChangeLocationUA {
             get {
-                return ResourceManager.GetString("ChangeLocation", resourceCulture);
+                return ResourceManager.GetString("ChangeLocationUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. (Changesmorning time to be aware of weather every day automatically).
         /// </summary>
-        public static string ChangeMorningTime {
+        public static string ChangeMorningTimeUA {
             get {
-                return ResourceManager.GetString("ChangeMorningTime", resourceCulture);
+                return ResourceManager.GetString("ChangeMorningTimeUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 🌞Надсилає поточну погоду. (Sends the current weather).
         /// </summary>
-        public static string CurrentWeather {
+        public static string CurrentWeatherUA {
             get {
-                return ResourceManager.GetString("CurrentWeather", resourceCulture);
+                return ResourceManager.GetString("CurrentWeatherUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 🙈Дає опис всіх доступних команд. (Shows all awailable commands).
         /// </summary>
-        public static string HelpCommand {
+        public static string HelpCommandUA {
             get {
-                return ResourceManager.GetString("HelpCommand", resourceCulture);
+                return ResourceManager.GetString("HelpCommandUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 🗣️Встановлює мову. (Sets the language).
         /// </summary>
-        public static string LanguageCommand {
+        public static string LanguageCommandUA {
             get {
-                return ResourceManager.GetString("LanguageCommand", resourceCulture);
+                return ResourceManager.GetString("LanguageCommandUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ⚙️Показує ваші налаштування. (Shows your settings).
         /// </summary>
-        public static string Settings {
+        public static string SettingsUA {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("SettingsUA", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 🚀Запускає бота. (Starts the bot).
         /// </summary>
-        public static string StartCommand {
+        public static string StartCommandUA {
             get {
-                return ResourceManager.GetString("StartCommand", resourceCulture);
+                return ResourceManager.GetString("StartCommandUA", resourceCulture);
             }
         }
     }
