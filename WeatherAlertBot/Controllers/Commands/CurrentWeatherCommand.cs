@@ -50,43 +50,43 @@ namespace WeatherAlertBot.Controllers.Commands
             {
                 case <= 0.5:
                     Recommendation += language == "en"
-                        ? "No need to worry about getting wet 🌈©️ \n"
-                        : "Можна не боятися намокнути 🌈©️ \n";
+                        ? "No need to worry about getting wet 😺 \n"
+                        : "Можна не боятися намокнути 😺 \n";
                     return language == "en"
                         ? "No rain 🌤️"
                         : "Дощу нема 🌤️";
                 case > 0.5 and <= 2:
                     Recommendation += language == "en"
-                        ? "Might want to wear something light 🧥©️ \n"
-                        : "Щось таки треба вдягнути 🧥©️ \n";
+                        ? "Might want to wear something light 🧥 \n"
+                        : "Щось таки треба вдягнути 🧥 \n";
                     return language == "en"
                         ? "Drizzling 💧"
                         : "Моросить 💧";
                 case > 2 and <= 6:
                     Recommendation += language == "en"
-                        ? "Definitely bring an umbrella ☂️©️ \n"
-                        : "Тут точно треба парасоля ☂️©️ \n";
+                        ? "Definitely bring an umbrella ☂ \n"
+                        : "Тут точно треба парасоля ☂️ \n";
                     return language == "en"
                         ? "Moderate rain ☔"
                         : "Середній дощ ☔";
                 case > 6 and <= 10:
                     Recommendation += language == "en"
-                        ? "Be cautious, an umbrella won't help much ⚠️🌧️©️ \n"
-                        : "Треба бути обережним, тут парасоля мало чим допоможе ⚠️🌧️©️ \n";
+                        ? "Be cautious, an umbrella won't help much ⚠️🌧️ \n"
+                        : "Треба бути обережним, тут парасоля мало чим допоможе ⚠️🌧️ \n";
                     return language == "en"
                         ? "Heavy rain 🌧️"
                         : "Сильний дощ 🌧️";
                 case > 10 and <= 18:
                     Recommendation += language == "en"
-                        ? "Better stay home 🏠©️ \n"
-                        : "Без коментарів, рекомендую залишитись вдома 🏠©️ \n";
+                        ? "Better stay home 🏠 \n"
+                        : "Без коментарів, рекомендую залишитись вдома 🏠 \n";
                     return language == "en"
                         ? "Very heavy rain 😶‍🌫"
                         : "Дуже сильний дощ 😶‍🌫";
                 case > 18:
                     Recommendation += language == "en"
-                        ? "No comments, this is death... 🌊©️ \n"
-                        : "Ну тут без коментарів, це смерть... 🌊©️ \n";
+                        ? "No comments, this is death... 🌊 \n"
+                        : "Ну тут без коментарів, це смерть... 🌊 \n";
                     return language == "en"
                         ? "Pouring like crazy, the heaviest rain ⚠️⚠️"
                         : "Л'є як із відра, найсильніший дощ ⚠️⚠️";
@@ -100,15 +100,15 @@ namespace WeatherAlertBot.Controllers.Commands
             {
                 case < -30:
                     Recommendation += language == "en"
-                        ? "You'll need Antarctic gear for this 🧊🐧©️\n"
-                        : "Тут без обладунків Антарктики ніяк 🧊🐧©️\n";
+                        ? "You'll need Antarctic gear for this 🐧\n"
+                        : "Тут без обладунків Антарктики ніяк 🐧\n";
                     return language == "en"
                         ? "No comment 🥶"
                         : "Без коментарів 🥶";
                 case < -15 and >= -30:
                     Recommendation += language == "en"
-                        ? "Feels like a Frozen cosplay 🥶\n"
-                        : "Це косплей на крижане серце 🥶\n";
+                        ? "Feels like a Frozen cosplay ⛄\n"
+                        : "Це косплей на крижане серце ⛄\n";
                     return language == "en"
                         ? "Very cold 🧊"
                         : "Дуже холодно 🧊";
@@ -128,8 +128,8 @@ namespace WeatherAlertBot.Controllers.Commands
                         : "З вітерцем ༄";
                 case > 10 and <= 20:
                     Recommendation += language == "en"
-                        ? "Perfect temperature, just right 🌸\n"
-                        : "Золота серединка по температурі 🌸\n";
+                        ? "Perfect temperature, just right 🌸☀️\n"
+                        : "Золота серединка по температурі 🌸☀️\n";
                     return language == "en"
                         ? "Warm 🔅"
                         : "Тепленько 🔅";
