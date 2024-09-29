@@ -61,7 +61,7 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enables morning weather notifications.
+        ///   Looks up a localized string similar to 🔔 Enables morning weather notifications.
         /// </summary>
         public static string AnableNotificationEN {
             get {
@@ -79,7 +79,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити. (Changes the location from where you want know the weather) 🌎.
+        ///   Looks up a localized string similar to 🌍 Changes the location from where you want know the weather .
+        /// </summary>
+        public static string ChangeLocationEN {
+            get {
+                return ResourceManager.GetString("ChangeLocationEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🌍 Змінює місто, погоду якого ви хочете відстежити .
         /// </summary>
         public static string ChangeLocationUA {
             get {
@@ -88,7 +97,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. (Changesmorning time to be aware of weather every day automatically).
+        ///   Looks up a localized string similar to 🏜️ Changes morning time to be aware of weather every day automatically.
+        /// </summary>
+        public static string ChangeMorningTimeEN {
+            get {
+                return ResourceManager.GetString("ChangeMorningTimeEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🏜️ Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду поточну та на день.
         /// </summary>
         public static string ChangeMorningTimeUA {
             get {
@@ -97,7 +115,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🌞Надсилає поточну погоду. (Sends the current weather).
+        ///   Looks up a localized string similar to 🌞 Sends the current weather.
+        /// </summary>
+        public static string CurrentWeatherEN {
+            get {
+                return ResourceManager.GetString("CurrentWeatherEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🌞 Надсилає поточну погоду.
         /// </summary>
         public static string CurrentWeatherUA {
             get {
@@ -106,7 +133,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🙈Дає опис всіх доступних команд. (Shows all awailable commands).
+        ///   Looks up a localized string similar to 🙈 Shows all awailable commands.
+        /// </summary>
+        public static string HelpCommandEN {
+            get {
+                return ResourceManager.GetString("HelpCommandEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🙈 Дає опис всіх доступних команд.
         /// </summary>
         public static string HelpCommandUA {
             get {
@@ -115,7 +151,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🗣️Встановлює мову. (Sets the language).
+        ///   Looks up a localized string similar to 🗣️ Sets the language.
+        /// </summary>
+        public static string LanguageCommandEN {
+            get {
+                return ResourceManager.GetString("LanguageCommandEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🗣️ Встановлює мову.
         /// </summary>
         public static string LanguageCommandUA {
             get {
@@ -124,7 +169,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ⚙️Показує ваші налаштування. (Shows your settings).
+        ///   Looks up a localized string similar to ⚙️ Shows your settings.
+        /// </summary>
+        public static string SettingsEN {
+            get {
+                return ResourceManager.GetString("SettingsEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚙️ Показує ваші налаштування.
         /// </summary>
         public static string SettingsUA {
             get {
@@ -133,7 +187,16 @@ namespace WeatherAlertBot.Controllers.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🚀Запускає бота. (Starts the bot).
+        ///   Looks up a localized string similar to 🚀 Starts the bot.
+        /// </summary>
+        public static string StartCommandEN {
+            get {
+                return ResourceManager.GetString("StartCommandEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🚀 Запускає бота.
         /// </summary>
         public static string StartCommandUA {
             get {

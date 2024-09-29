@@ -32,13 +32,13 @@ builder.Services.AddScoped<IGetUserService, GetUserService>();
 builder.Services.AddScoped<IMorningNotificationService, MorningNotificationService>();
 
 builder.Services.AddTransient<ICommand, StartCommand>();
-builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
+builder.Services.AddTransient<ICommand, LanguageCommand>();
 builder.Services.AddTransient<ICommand, SettingsCommand>();
+builder.Services.AddTransient<ICommand, CurrentWeatherCommand>();
 builder.Services.AddTransient<ICommand, ChangeLocationCommand>();
+builder.Services.AddTransient<ICommand, AnableNotificationCommand>();
 builder.Services.AddTransient<ICommand, ChangeMorningTimeCommand>();
 builder.Services.AddTransient<ICommand, DailyWeatherCommand>();
-builder.Services.AddTransient<ICommand, AnableNotificationCommand>();
-builder.Services.AddTransient<ICommand, LanguageCommand>();
 builder.Services.AddTransient<ICommand, BackCommand>();
 builder.Services.AddTransient<ICommand, HelpCommand>();
 

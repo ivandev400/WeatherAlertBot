@@ -11,7 +11,7 @@ namespace WeatherAlertBot.Controllers.Commands
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/dailyweather";
-        public string CommandDescription => CommandDescriptions.CurrentWeather;
+        public string CommandDescription { get; set; }
 
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
@@ -30,12 +30,18 @@ namespace WeatherAlertBot.Controllers.Commands
 
         public async Task Execute(Update update)
         {
+            CommandDescription = null;
             long chatId = update.Message.Chat.Id;
             var userSettings = settingsService.ReturnSettings(update);
             var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
 
             await Client.SendTextMessageAsync(chatId, "This is daily predication", replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
             Recommendation = null;
+        }
+
+        public async Task SetDescription(Update update)
+        {
+            CommandDescription = null;
         }
     }
 }

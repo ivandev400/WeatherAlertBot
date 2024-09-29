@@ -3,6 +3,8 @@ using WeatherAlertBot.Models;
 using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
 using Telegram.Bot.Types.Enums;
+using Supabase.Gotrue;
+using WeatherAlertBot.Services;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -10,7 +12,7 @@ namespace WeatherAlertBot.Controllers.Commands
 	{
 		public TelegramBotClient Client => Bot.GetTelegramBot();
 		public string CommandName => "/settings";
-		public string CommandDescription => CommandDescriptions.Settings;
+		public string CommandDescription {  get; set; }
 
 		public IReturnSettingsService settingsService;
 		public IReplyKeyboard replyMarkup;
@@ -29,7 +31,13 @@ namespace WeatherAlertBot.Controllers.Commands
 
 			var settings = settingsService.ReturnSettings(update);
 
-			await Client.SendTextMessageAsync(chatId, stringSettings, null, ParseMode.Html, replyMarkup: replyMarkup.GetOneTimeMarkup(settings.Language));
+            await Client.SendTextMessageAsync(chatId, stringSettings, null, ParseMode.Html, replyMarkup: replyMarkup.GetOneTimeMarkup(settings.Language));
 		}
+
+        public async Task SetDescription(Update update)
+        {
+            var settings = settingsService.ReturnSettings(update);
+            CommandDescription = settings.Language == "en" ? CommandDescriptions.SettingsEN : CommandDescriptions.SettingsUA;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace WeatherAlertBot.Controllers.Commands
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/changelocation";
-        public string CommandDescription => CommandDescriptions.ChangeLocation;
+        public string CommandDescription { get; set; }
 
         public IChangeUserSettingsService changeSettings;
         public IGetUserService getUserService;
@@ -64,6 +64,12 @@ namespace WeatherAlertBot.Controllers.Commands
             var text = user.Language == "en" ? "✅ Success" : "✅ Операція успішна";
             await Client.SendTextMessageAsync(chatId, text, replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
             Executor.StopListen();
+        }
+
+        public async Task SetDescription(Update update)
+        {
+            var user = getUserService.GetUser(update);
+            CommandDescription = user.Language == "en" ? CommandDescriptions.ChangeLocationEN : CommandDescriptions.ChangeLocationUA;
         }
     }
 }

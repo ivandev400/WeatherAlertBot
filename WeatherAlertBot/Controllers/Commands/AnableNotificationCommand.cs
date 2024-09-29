@@ -9,7 +9,7 @@ namespace WeatherAlertBot.Controllers.Commands
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/anablenotification";
-        public string CommandDescription => CommandDescriptions.AnableNotification;
+        public string CommandDescription {  get; set; }
 
         public IChangeUserSettingsService changeSettings;
         public IGetUserService getUserService;
@@ -66,6 +66,12 @@ namespace WeatherAlertBot.Controllers.Commands
             await Client.SendTextMessageAsync(chatId, text, replyMarkup: replyMarkup.GetPermanentMarkup(user.Language));
             Executor.StopListen();
             return;
+        }
+
+        public async Task SetDescription(Update update)
+        {
+            var user = getUserService.GetUser(update);
+            CommandDescription = user.Language == "en" ? CommandDescriptions.AnableNotificationEN : CommandDescriptions.AnableNotificationUA;
         }
     }
 }

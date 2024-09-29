@@ -118,30 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangeLocationUA" xml:space="preserve">
-    <value>🌍 Змінює місто, погоду якого ви хочете відстежити. (Changes the location from where you want know the weather) 🌎</value>
+    <value>🌍 Змінює місто, погоду якого ви хочете відстежити </value>
   </data>
   <data name="ChangeMorningTimeUA" xml:space="preserve">
-    <value>🏜️Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду на день. (Changesmorning time to be aware of weather every day automatically)</value>
+    <value>🏜️ Змінює час ранку, встановлюється для того, щоб на визначений час кожен ранок надсилати погоду поточну та на день</value>
   </data>
   <data name="CurrentWeatherUA" xml:space="preserve">
-    <value>🌞Надсилає поточну погоду. (Sends the current weather)</value>
+    <value>🌞 Надсилає поточну погоду</value>
   </data>
   <data name="HelpCommandUA" xml:space="preserve">
-    <value>🙈Дає опис всіх доступних команд. (Shows all awailable commands)</value>
+    <value>🙈 Дає опис всіх доступних команд</value>
   </data>
   <data name="SettingsUA" xml:space="preserve">
-    <value>⚙️Показує ваші налаштування. (Shows your settings)</value>
+    <value>⚙️ Показує ваші налаштування</value>
   </data>
   <data name="StartCommandUA" xml:space="preserve">
-    <value>🚀Запускає бота. (Starts the bot)</value>
+    <value>🚀 Запускає бота</value>
   </data>
   <data name="AnableNotificationUA" xml:space="preserve">
     <value>🔔 Активує ранкові сповіщення про погоду</value>
   </data>
   <data name="LanguageCommandUA" xml:space="preserve">
-    <value>🗣️Встановлює мову. (Sets the language)</value>
+    <value>🗣️ Встановлює мову</value>
   </data>
   <data name="AnableNotificationEN" xml:space="preserve">
-    <value>Enables morning weather notifications</value>
+    <value>🔔 Enables morning weather notifications</value>
+  </data>
+  <data name="ChangeLocationEN" xml:space="preserve">
+    <value>🌍 Changes the location from where you want know the weather </value>
+  </data>
+  <data name="ChangeMorningTimeEN" xml:space="preserve">
+    <value>🏜️ Changes morning time to be aware of weather every day automatically</value>
+  </data>
+  <data name="CurrentWeatherEN" xml:space="preserve">
+    <value>🌞 Sends the current weather</value>
+  </data>
+  <data name="HelpCommandEN" xml:space="preserve">
+    <value>🙈 Shows all awailable commands</value>
+  </data>
+  <data name="LanguageCommandEN" xml:space="preserve">
+    <value>🗣️ Sets the language</value>
+  </data>
+  <data name="SettingsEN" xml:space="preserve">
+    <value>⚙️ Shows your settings</value>
+  </data>
+  <data name="StartCommandEN" xml:space="preserve">
+    <value>🚀 Starts the bot</value>
   </data>
 </root>

@@ -11,7 +11,7 @@ namespace WeatherAlertBot.Controllers.Commands
     {
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/currentweather";
-        public string CommandDescription => CommandDescriptions.CurrentWeather;
+        public string CommandDescription {  get; set; }
 
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
@@ -107,50 +107,50 @@ namespace WeatherAlertBot.Controllers.Commands
                         : "Без коментарів 🥶";
                 case < -15 and >= -30:
                     Recommendation += language == "en"
-                        ? "Feels like a Frozen cosplay 🥶❄️©️\n"
-                        : "Це косплей на крижане серце 🥶❄️©️\n";
+                        ? "Feels like a Frozen cosplay 🥶\n"
+                        : "Це косплей на крижане серце 🥶\n";
                     return language == "en"
                         ? "Very cold 🧊"
                         : "Дуже холодно 🧊";
                 case < 0 and >= -15:
                     Recommendation += language == "en"
-                        ? "I recommend wearing something warm 🧣🧥©️\n"
-                        : "Рекомендую вдягнути щось тепленьке 🧣🧥©️\n";
+                        ? "I recommend wearing something warm 🧣\n"
+                        : "Рекомендую вдягнути щось тепленьке 🧣\n";
                     return language == "en"
                         ? "Cold ❄️"
                         : "Холодно ❄️";
                 case > 0 and <= 10:
                     Recommendation += language == "en"
-                        ? "Spring-like weather, wear something light 🌷🧥©️\n"
-                        : "Весняна погодка, рекомендую щось вдягнути 🌷🧥©️\n";
+                        ? "Spring-like weather, wear something light 🧥\n"
+                        : "Весняна погодка, рекомендую щось вдягнути 🧥\n";
                     return language == "en"
                         ? "Breezy ༄"
                         : "З вітерцем ༄";
                 case > 10 and <= 20:
                     Recommendation += language == "en"
-                        ? "Perfect temperature, just right 🌸☀️©️\n"
-                        : "Золота серединка по температурі 🌸☀️©️\n";
+                        ? "Perfect temperature, just right 🌸\n"
+                        : "Золота серединка по температурі 🌸\n";
                     return language == "en"
                         ? "Warm 🔅"
                         : "Тепленько 🔅";
                 case > 20 and <= 30:
                     Recommendation += language == "en"
-                        ? "It's hot, no need to overthink the outfit 🌞👕©️\n"
-                        : "Жарко, з одягом можна не паритись 🌞👕©️\n";
+                        ? "It's hot, no need to overthink the outfit 👕\n"
+                        : "Жарко, з одягом можна не паритись 👕\n";
                     return language == "en"
                         ? "Hot 🔥"
                         : "Жара 🔥";
                 case > 30 and <= 45:
                     Recommendation += language == "en"
-                        ? "Good luck 🔥☀️©️\n"
-                        : "Бажаю удачі 🔥☀️©️\n";
+                        ? "Good luck 🔥\n"
+                        : "Бажаю удачі 🔥\n";
                     return language == "en"
                         ? "Scorching ⁶⁶⁶"
                         : "Пекло ⁶⁶⁶";
                 case > 45:
                     Recommendation += language == "en"
-                        ? "You're in the Hunger Games now... 🏹©️"
-                        : "Ти приймаєш участь в голодних іграх, гра почалась... 🏹©️";
+                        ? "You're in the Hunger Games now... 🏹"
+                        : "Ти приймаєш участь в голодних іграх, гра почалась... 🏹";
                     return language == "en"
                         ? "This is the Earth's core 🌋"
                         : "Це десь ядро Землі 🌋";
@@ -158,5 +158,10 @@ namespace WeatherAlertBot.Controllers.Commands
             return "";
         }
 
+        public async Task SetDescription(Update update)
+        {
+            var user = getUserService.GetUser(update);
+            CommandDescription = user.Language == "en" ? CommandDescriptions.CurrentWeatherEN : CommandDescriptions.CurrentWeatherUA;
+        }
     }
 }
