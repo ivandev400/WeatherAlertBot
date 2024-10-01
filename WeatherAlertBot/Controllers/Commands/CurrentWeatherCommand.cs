@@ -33,7 +33,7 @@ namespace WeatherAlertBot.Controllers.Commands
             long chatId = update.Message.Chat.Id;
             var user = getUserService.GetUser(update);
             var userSettings = settingsService.ReturnSettings(update);
-            var weatherResult = await weatherService.GetWeatherDataStringResponse(userSettings, geocodingApiKey);
+            var weatherResult = await weatherService.GetCurrentWeatherDataStringResponse(userSettings, geocodingApiKey);
 
             string message = $"⌚   <b>{weatherResult.Time.ToString("HH:mm")}</b>\n" +
                              $"🌡️   <b>{weatherResult.Temperature}°C</b> - {TemperatureConverter(weatherResult.Temperature, user.Language)}\n" +

@@ -29,7 +29,7 @@ namespace WeatherAlertBot.Controllers
             switch (update.Message.Text)
             {
                 case "Змінити місце":
-                    case "Change location":
+                    case "Change Location":
                     update.Message.Text = "/changelocation";
                     break;
 

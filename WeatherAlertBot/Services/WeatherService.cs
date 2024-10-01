@@ -42,7 +42,7 @@ namespace WeatherAlertBot.Services
                 return geocodingResult;
             }
         }
-        public async Task<WeatherResult> GetWeatherDataStringResponse(UserSettings settings, string geocodingApiKey)
+        public async Task<WeatherResult> GetCurrentWeatherDataStringResponse(UserSettings settings, string geocodingApiKey)
         {
             var weatherResult = new WeatherResult();
 
