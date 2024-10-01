@@ -27,7 +27,7 @@ namespace WeatherAlertBot.Services
 
                     settings.Location = location;
 
-                    var weatherResult = weatherService.GetWeatherDataStringResponse(settings, geocodingApiKey);
+                    var weatherResult = weatherService.GetCurrentWeatherDataResponse(settings, geocodingApiKey);
                     settings.TimeZone = weatherResult.Result.TimeZone.ToString();
                     userContext.SaveChanges();
                 }
