@@ -31,9 +31,20 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             long chatId = update.Message.Chat.Id;
             var userSettings = settingsService.ReturnSettings(update);
-            var dailyweatherResult = await weatherService.GetDailyWeatherDataResponse(userSettings, geocodingApiKey);
+            var weatherResult = await weatherService.GetDailyWeatherDataResponse(userSettings, geocodingApiKey);
+            var dailyWeather = weatherResult.DailyWeather;
+            var hourlyWeather = weatherResult.HourlyWeather;
 
-            await Client.SendTextMessageAsync(chatId, "dgadsgadsg", replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
+            var rainProbabilityText = userSettings.Language == "en" ? "Rain Probability: " : "Вірогідність опадів: ";
+
+            var textMessage = $"MAX: {dailyWeather.MaxTemperature.FirstOrDefault()}°C \n" +
+                $"MIN: {dailyWeather.MinTemperature.FirstOrDefault()}°C \n" +
+                $"{rainProbabilityText}{dailyWeather.RainSum.FirstOrDefault()} \n" +
+                $"MAX: {dailyWeather.MaxWindSpeed.FirstOrDefault()}km/h \n\n\n\n" +
+
+                $"";
+
+            await Client.SendTextMessageAsync(chatId, textMessage, replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
             Recommendation = null;
         }
 

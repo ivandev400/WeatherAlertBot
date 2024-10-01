@@ -65,9 +65,9 @@ namespace WeatherAlertBot.Services
                 return weatherResult;
             }
         }
-        public async Task<DailyWeather> GetDailyWeatherDataResponse(UserSettings settings, string geocodingApiKey)
+        public async Task<DailyWeatherResponse> GetDailyWeatherDataResponse(UserSettings settings, string geocodingApiKey)
         {
-            var dailyWeather = new DailyWeather();
+            var dailyWeatherResponse = new DailyWeatherResponse();
 
             using (HttpClient client = new HttpClient())
             {
@@ -81,10 +81,10 @@ namespace WeatherAlertBot.Services
 
                     if (currentWeather != null)
                     {
-                        dailyWeather = currentWeather.DailyWeather;
+                        dailyWeatherResponse = currentWeather;
                     }
                 }
-                return dailyWeather;
+                return dailyWeatherResponse;
             }
         }
     }
