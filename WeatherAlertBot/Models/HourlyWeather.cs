@@ -10,6 +10,9 @@ namespace WeatherAlertBot.Models
         [JsonProperty("temperature_2m")]
         public List<double> Temperature { get; set; }
 
+        [JsonProperty("rain")]
+        public List<double> Rain { get; set; }
+
         [JsonProperty("wind_speed_10m")]
         public List<double> WindSpeed { get; set; }
     }
