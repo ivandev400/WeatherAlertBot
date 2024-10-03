@@ -42,6 +42,8 @@ namespace WeatherAlertBot.Controllers.Commands
             var hourlyWeather = weatherResult.HourlyWeather;
 
             var morningData = FilterTimeRange(hourlyWeather, 5, 11);
+            var breakfastData = FilterTimeRange(hourlyWeather, 12, 16);
+            var eveningData = FilterTimeRange(hourlyWeather, 17, 24);
 
             var rainProbabilityText = userSettings.Language == "en" ? "Rain Probability: " : "Вірогідність опадів: ";
 
@@ -50,9 +52,20 @@ namespace WeatherAlertBot.Controllers.Commands
                 $"{rainProbabilityText}{dailyWeather.RainSum.FirstOrDefault()} \n" +
                 $"MAX: {dailyWeather.MaxWindSpeed.FirstOrDefault()}km/h \n\n\n\n" +
 
-                $"Average temperature morning: {Math.Round(morningData.Average(x => x.temperature), 1)}°C \n" +
+                $"MORNING: \n" +
+                $"Average temperature: {Math.Round(morningData.Average(x => x.temperature), 1)}°C \n" +
                 $"Avarage rain probability: {Math.Round(morningData.Average(x => x.rain), 1)}mm \n" +
-                $"Average wind speed: {Math.Round(morningData.Average(x => x.windSpeed), 1)}km/h";
+                $"Average wind speed: {Math.Round(morningData.Average(x => x.windSpeed), 1)}km/h \n\n" +
+
+                $"BREAKFAST: \n" +
+                $"Average temperature: {Math.Round(breakfastData.Average(x => x.temperature), 1)}°C \n" +
+                $"Avarage rain probability: {Math.Round(breakfastData.Average(x => x.rain), 1)}mm \n" +
+                $"Average wind speed: {Math.Round(breakfastData.Average(x => x.windSpeed), 1)}km/h \n\n" +
+
+                $"EVENING: \n" +
+                $"Average temperature: {Math.Round(eveningData.Average(x => x.temperature), 1)}°C \n" +
+                $"Avarage rain probability: {Math.Round(eveningData.Average(x => x.rain), 1)}mm \n" +
+                $"Average wind speed: {Math.Round(eveningData.Average(x => x.windSpeed), 1)}km/h \n\n";
 
             await Client.SendTextMessageAsync(chatId, textMessage, replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
             await GenerateWeatherPlot(hourlyWeather, update, userSettings.Language);
