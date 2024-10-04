@@ -4,9 +4,6 @@ using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
 using WeatherAlertBot.Services;
 using ScottPlot;
-using ScottPlot.Colormaps;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -18,12 +15,14 @@ namespace WeatherAlertBot.Controllers.Commands
 
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
+        public IWeatherPlotService plotService;
         public IGetUserService getUserService;
         public IReturnSettingsService settingsService;
         public IReplyKeyboard replyMarkup;
 
-        public DailyWeatherCommand(IReturnSettingsService settingsService, IReplyKeyboard replyMarkup, IGetUserService getUserService)
+        public DailyWeatherCommand(IWeatherPlotService plotService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup, IGetUserService getUserService)
         { 
+            this.plotService = plotService;
             this.settingsService = settingsService;
             this.replyMarkup = replyMarkup;
             this.getUserService = getUserService;
@@ -37,17 +36,14 @@ namespace WeatherAlertBot.Controllers.Commands
             var userSettings = settingsService.ReturnSettings(update);
             var weatherResult = await weatherService.GetDailyWeatherDataResponse(userSettings, geocodingApiKey);
 
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            var key = configuration["ChatGPTApiKey"];
-            var textToImageService = new OpenAITextToImageService(key);
+            
 
             var dailyWeather = weatherResult.DailyWeather;
             var hourlyWeather = weatherResult.HourlyWeather;
 
             var morningData = FilterTimeRange(hourlyWeather, 5, 11);
+            var breakfastData = FilterTimeRange(hourlyWeather, 12, 16);
+            var eveningData = FilterTimeRange(hourlyWeather, 17, 24);
 
             var rainProbabilityText = userSettings.Language == "en" ? "Rain Probability: " : "Вірогідність опадів: ";
 
@@ -56,11 +52,23 @@ namespace WeatherAlertBot.Controllers.Commands
                 $"{rainProbabilityText}{dailyWeather.RainSum.FirstOrDefault()} \n" +
                 $"MAX: {dailyWeather.MaxWindSpeed.FirstOrDefault()}km/h \n\n\n\n" +
 
-                $"Average temperature morning: {Math.Round(morningData.Average(x => x.temperature), 1)}°C \n" +
+                $"MORNING: \n" +
+                $"Average temperature: {Math.Round(morningData.Average(x => x.temperature), 1)}°C \n" +
                 $"Avarage rain probability: {Math.Round(morningData.Average(x => x.rain), 1)}mm \n" +
-                $"Average wind speed: {Math.Round(morningData.Average(x => x.windSpeed), 1)}km/h";
+                $"Average wind speed: {Math.Round(morningData.Average(x => x.windSpeed), 1)}km/h \n\n" +
+
+                $"BREAKFAST: \n" +
+                $"Average temperature: {Math.Round(breakfastData.Average(x => x.temperature), 1)}°C \n" +
+                $"Avarage rain probability: {Math.Round(breakfastData.Average(x => x.rain), 1)}mm \n" +
+                $"Average wind speed: {Math.Round(breakfastData.Average(x => x.windSpeed), 1)}km/h \n\n" +
+
+                $"EVENING: \n" +
+                $"Average temperature: {Math.Round(eveningData.Average(x => x.temperature), 1)}°C \n" +
+                $"Avarage rain probability: {Math.Round(eveningData.Average(x => x.rain), 1)}mm \n" +
+                $"Average wind speed: {Math.Round(eveningData.Average(x => x.windSpeed), 1)}km/h \n\n";
 
             await Client.SendTextMessageAsync(chatId, textMessage, replyMarkup: replyMarkup.GetPermanentMarkup(userSettings.Language));
+            await plotService.GenerateWeatherPlot(Client, hourlyWeather, update, userSettings.Language);
             Recommendation = null;
         }
 
