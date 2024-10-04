@@ -5,6 +5,8 @@ using WeatherAlertBot.Models;
 using WeatherAlertBot.Services;
 using ScottPlot;
 using ScottPlot.Colormaps;
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -34,6 +36,13 @@ namespace WeatherAlertBot.Controllers.Commands
             long chatId = update.Message.Chat.Id;
             var userSettings = settingsService.ReturnSettings(update);
             var weatherResult = await weatherService.GetDailyWeatherDataResponse(userSettings, geocodingApiKey);
+
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var key = configuration["ChatGPTApiKey"];
+            var textToImageService = new OpenAITextToImageService(key);
 
             var dailyWeather = weatherResult.DailyWeather;
             var hourlyWeather = weatherResult.HourlyWeather;
