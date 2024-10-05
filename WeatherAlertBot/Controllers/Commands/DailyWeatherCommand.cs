@@ -12,9 +12,10 @@ namespace WeatherAlertBot.Controllers.Commands
         public TelegramBotClient Client => Bot.GetTelegramBot();
         public string CommandName => "/dailyweather";
         public string CommandDescription { get; set; }
-
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
+        public string ChatGPTApiKey => Bot.ChatGPTApiKey;
+
         public IWeatherPlotService plotService;
         public IGetUserService getUserService;
         public IReturnSettingsService settingsService;
