@@ -28,6 +28,7 @@ namespace WeatherAlertBot.Controllers.Commands
         public ReplyKeyboardMarkup GetPermanentMarkup(string language)
         {
             string currentWeatherText = language == "en" ? "Current Weather" : "Поточна погода";
+            string dailyWeatherText = language == "en" ? "Daily Weather" : "Погода на день";
             string settingsText = language == "en" ? "Settings" : "Налаштування";
             string setLanguageText = language == "en" ? "Language" : "Мова";
             string helpText = language == "en" ? "Help" : "Допомогти";
@@ -35,6 +36,7 @@ namespace WeatherAlertBot.Controllers.Commands
             return new ReplyKeyboardMarkup(new[]
             {
                 new KeyboardButton[] { currentWeatherText },
+                new KeyboardButton[] { dailyWeatherText },
                 new KeyboardButton[] { settingsText },
                 new KeyboardButton[] { setLanguageText },
                 new KeyboardButton[] { helpText }

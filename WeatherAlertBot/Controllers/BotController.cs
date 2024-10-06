@@ -67,6 +67,10 @@ namespace WeatherAlertBot.Controllers
                     case "Назад":
                     update.Message.Text = "/back";
                     break;
+                case "Daily Weather":
+                    case "Погода на день":
+                    update.Message.Text = "/dailyweather";
+                    break;
             }
 
             await updateDistributor.GetUpdate(update);
