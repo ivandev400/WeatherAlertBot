@@ -8,7 +8,6 @@ namespace WeatherAlertBot.Models
         public static TelegramBotClient Client { get; private set; }
         private static string BotToken { get; set; }
         public static string GeocodingApiKey { get; set; }
-        public static string ChatGPTApiKey { get; set; }
 
         static Bot()
         {
@@ -18,7 +17,6 @@ namespace WeatherAlertBot.Models
 
             BotToken = configuration["BotToken"];
             GeocodingApiKey = configuration["GeocodingApiKey"];
-            ChatGPTApiKey = configuration["ChatGPTApiKey"];
         }
 
         public static TelegramBotClient GetTelegramBot()

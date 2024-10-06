@@ -3,7 +3,6 @@ using Telegram.Bot.Types;
 using WeatherAlertBot.Interfaces;
 using WeatherAlertBot.Models;
 using WeatherAlertBot.Services;
-using ScottPlot;
 
 namespace WeatherAlertBot.Controllers.Commands
 {
@@ -14,7 +13,6 @@ namespace WeatherAlertBot.Controllers.Commands
         public string CommandDescription { get; set; }
         private WeatherService weatherService => new WeatherService();
         private string geocodingApiKey => Bot.GeocodingApiKey;
-        public string ChatGPTApiKey => Bot.ChatGPTApiKey;
 
         public IWeatherPlotService plotService;
         public IGetUserService getUserService;
@@ -38,7 +36,7 @@ namespace WeatherAlertBot.Controllers.Commands
             var weatherResult = await weatherService.GetDailyWeatherDataResponse(userSettings, geocodingApiKey);
 
             
-
+            
             var dailyWeather = weatherResult.DailyWeather;
             var hourlyWeather = weatherResult.HourlyWeather;
 
@@ -77,6 +75,7 @@ namespace WeatherAlertBot.Controllers.Commands
         {
             CommandDescription = null;
         }
+
         private IEnumerable<(double temperature, double rain, double windSpeed)> FilterTimeRange(HourlyWeather hourly, int startHour, int endHour)
         {
             var filteredData = hourly.Hours

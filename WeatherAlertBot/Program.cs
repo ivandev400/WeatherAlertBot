@@ -31,7 +31,6 @@ builder.Services.AddScoped<IChangeUserSettingsService, ChangeUserSettingsService
 builder.Services.AddScoped<IGetUserService, GetUserService>();
 builder.Services.AddScoped<IMorningNotificationService, MorningNotificationService>();
 builder.Services.AddScoped<IWeatherPlotService, WeatherPlotService>();
-builder.Services.AddScoped<IImageGeneratorService, ImageGeneratorService>();
 
 builder.Services.AddTransient<ICommand, StartCommand>();
 builder.Services.AddTransient<ICommand, LanguageCommand>();

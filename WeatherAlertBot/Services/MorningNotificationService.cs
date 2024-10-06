@@ -10,10 +10,10 @@ namespace WeatherAlertBot.Services
         public CurrentWeatherCommand CurrentWeatherCommand;
         public DailyWeatherCommand DailyWeatherCommand;
 
-        public MorningNotificationService(IGetUserService getUserService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
+        public MorningNotificationService(IWeatherPlotService plotService, IGetUserService getUserService, IReturnSettingsService settingsService, IReplyKeyboard replyMarkup)
         {
             CurrentWeatherCommand = new CurrentWeatherCommand(settingsService, replyMarkup, getUserService);
-            DailyWeatherCommand = new DailyWeatherCommand(settingsService, replyMarkup, getUserService);
+            DailyWeatherCommand = new DailyWeatherCommand(plotService, settingsService, replyMarkup, getUserService);
         }
 
         public async Task SendMorningNotification(User user)
